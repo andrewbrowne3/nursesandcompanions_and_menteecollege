@@ -23,6 +23,7 @@ guided_options = {
         "Practical Nursing",
         "Nurse Aide (Certified Nursing Assistant)",
         "Medical Assistant",
+        "CPR & BLS Certification",
     ],
     "What is the best phone number our staff can reach you to help you begin your healthcare journey?": None,
 }
