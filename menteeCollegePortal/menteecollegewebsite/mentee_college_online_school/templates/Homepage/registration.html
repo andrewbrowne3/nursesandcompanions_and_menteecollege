@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+<div class="widget-wrap">
+    <center>
+        <h1>Registration</h1>
+
+        <div class="form-group">
+            <label for="programTypeSelector">Choose a program type:</label>
+            <select id="programTypeSelector">
+                <option value="associates">Associates</option>
+                <option value="diploma">Diploma</option>
+            </select>
+
+            <label for="programSelector">Choose a program:</label>
+            <select id="programSelector">
+                <option value="">---------</option>
+            </select>
+
+            <!---<form action="{% url 'application' %}" method="POST" id="certificateForm" style="display: none;">
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="certificate">
+                <table>
+                    {{ form_certificate.as_table }}
+                    <tr>
+                        <td>{{ form_certificate.course_section.label_tag }}</td>
+                        <td>
+                            <select name="{{ form_certificate.course_section.html_name }}" id="courseSectionSelect">
+                                <option value="">---------</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <input type="submit" value="Apply" class="btn btn-secondary">
+            </form>--->
+
+            <form action="{% url 'application' %}" method="POST" id="associatesForm" style="display: none;">
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="associates">
+                <table>
+                    {{ form_associates.as_table }}
+                </table>
+                <br>
+                <div id="associateTypes">
+                    <h3>Types of Associates:</h3>
+                    <ul>
+                        {% for program in associates_programs %}
+                        <li>{{ program.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div id="associates-course-checkboxes"></div>
+                <input type="submit" value="Apply" class="btn btn-secondary">
+            </form>
+
+            <form action="{% url 'application' %}" method="POST" id="diplomaForm" style="display: none;">
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="diploma">
+                <table>
+                    {{ form_diploma.as_table }}
+                </table>
+                <br>
+                <div id="diplomaTypes">
+                    <h3>Types of Diplomas:</h3>
+                    <ul>
+                        {% for program in diploma_programs %}
+                        <li>{{ program.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div id="diploma-course-checkboxes"></div>
+                <input type="submit" value="Apply" class="btn btn-secondary">
+            </form>
+           
+            <label for="courseSelectionSelect">Choose a course section:</label>
+            <select name="course_sections" id="courseSectionSelect" multiple>
+                <option value="">---------</option>
+            </select>
+        </div>
+    </center>
+</div>
+
+{% endblock %}

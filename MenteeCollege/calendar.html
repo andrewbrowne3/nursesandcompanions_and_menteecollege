@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/fav.png">
+    <!-- Meta Description -->
+    <meta name="description" content="Calendar for MenteeCollege and NursesAndCompanions events">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="Calendar, Events, Schedule, Mentee College">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>Calendar - Mentee College</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+    <!--
+    CSS
+    ============================================= -->
+    <link rel="stylesheet" href="css/linearicons.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/main.css">
+    
+    <!-- FullCalendar CSS -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' rel='stylesheet' />
+    
+    <!-- Custom Calendar CSS -->
+    <link rel="stylesheet" href="css/calendar.css">
+</head>
+<body>
+
+  <!-- Start header Area -->
+  <header id="header">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-sm-6 col-8 header-top-left no-padding">
+                    <ul>
+                        <li><a href="#"><b>Mentee College</b></a></li>
+                        <li><a href="//www.facebook.com/menteecollege"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="//www.instagram.com/menteecollege"><i class="fa fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-sm-6 col-4 header-top-right no-padding">
+                    <a href="tel:770 931 5020"><span class="lnr lnr-phone-handset"></span> <span class="text"><b>Phone: (770) 931-5020</b></span></a>
+                    <a href="mailto:admissions@menteecollege.com"><span class="lnr lnr-envelope"></span> <span class="text"><b>admissions@menteecollege.com</b></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container main-menu">
+        <div class="row align-items-center justify-content-between d-flex">
+            <div id="logo">
+            </div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="index.html">Home</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="Application.html">Program Applications</a>
+                        </li>
+                        <!-- Dropdown Menu for FAQs -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarFAQDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Frequently Asked Questions
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarFAQDropdown">
+                                <a class="dropdown-item" href="PN_FAQ.html">Practical Nurse (PN) FAQ</a>
+                                <a class="dropdown-item" href="MA(associate)_FAQ.html">Medical Assistant (MA associate) FAQ</a>
+                                <a class="dropdown-item" href="SonographyFAQ.html">Diagnostic Sonography FAQ</a>
+                                <a class="dropdown-item" href="MA(certificate)_FAQ.html">Medical Assistant (MA certificate) FAQ</a>
+                                <a class="dropdown-item" href="CNA_FAQ.html">Nurse Aide (CNA) FAQ</a>
+                                <a class="dropdown-item" href="Phlebotomy_FAQ.html">Phlebotomy FAQ</a>
+                                <a class="dropdown-item" href="EKG_FAQ.html">Electrocardiogram FAQ</a>
+                                <a class="dropdown-item" href="PCT_FAQ.html">Patient Care Technician (PCT) FAQ</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarstudentresources" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Student and Faculty Resources
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarstudentresources">
+                                <a class="dropdown-item" href="https://menteecollegeportal.moodlecloud.com/login/index.php">Moodle</a>
+                                <a class="dropdown-item" href="login.html">Student Payment Portal</a>
+                                <a class="dropdown-item" href="calendar.html">Calendar</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="gallery.html">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Stateauthorizations.html">State Authorizations</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+  </header>
+  <!-- End header Area -->
+
+  <!-- Page title area -->
+  <section class="banner-area relative about-banner" id="home">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Event Calendar
+                </h1>
+                <p class="text-white link-nav">
+                    <a href="index.html">Home </a> <span class="lnr lnr-arrow-right"></span> <a href="calendar.html"> Calendar</a>
+                </p>
+            </div>
+        </div>
+    </div>
+  </section>
+  <!-- End Page title area -->
+
+  <!-- Calendar section -->
+  <section class="calendar-area section-gap">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-70 col-lg-8">
+                <div class="title text-center">
+                    <h1 class="mb-10">Event Calendar</h1>
+                    <p>Track important dates, deadlines, and events</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Calendar filters -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="filter-container text-center">
+                    <select id="organizationFilter">
+                        <option value="all">All Organizations</option>
+                        <!-- Organizations will be loaded dynamically -->
+                    </select>
+                    
+                    <select id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <!-- Categories will be loaded dynamically -->
+                    </select>
+                    
+                    <select id="priorityFilter">
+                        <option value="all">All Priorities</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                        <option value="critical">Critical</option>
+                    </select>
+                    
+                    <select id="statusFilter">
+                        <option value="all">All Statuses</option>
+                        <option value="planned">Planned</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                        <option value="delayed">Delayed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                    
+                    <!-- Login button -->
+                    <div class="auth-buttons" style="margin-top: 15px;">
+                        <a href="login.html?redirect=calendar" id="loginButton" class="btn btn-primary" style="display: none;">Login for Full Access</a>
+                        <button id="logoutButton" class="btn btn-secondary" style="display: none;">Logout</button>
+                        <button id="addEventButton" class="btn btn-success" style="display: none;">Add Event</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Calendar container -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="calendar-container">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+  <!-- End Calendar Area -->
+
+  <!-- Event Modal -->
+  <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventModalLabel">Event Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="event-detail">
+                    <strong>Title:</strong> <span id="eventTitle"></span>
+                </div>
+                <div class="event-detail">
+                    <strong>Organization:</strong> <span id="eventOrganization"></span>
+                </div>
+                <div class="event-detail">
+                    <strong>Category:</strong> <span id="eventCategory"></span>
+                </div>
+                <div class="event-detail">
+                    <strong>Date:</strong> <span id="eventDate"></span>
+                </div>
+                <div class="event-detail">
+                    <strong>Time:</strong> <span id="eventTime"></span>
+                </div>
+                <div class="event-detail">
+                    <strong>Location:</strong> <span id="eventLocation"></span>
+                </div>
+                <div class="event-detail">
+                    <strong>Type:</strong> <span id="eventType"></span>
+                </div>
+                <div class="event-detail">
+                    <strong>Priority:</strong> <span id="eventPriority"></span>
+                </div>
+                <div class="event-detail">
+                    <strong>Status:</strong> <span id="eventStatus"></span>
+                </div>
+                <div class="event-detail">
+                    <strong>Description:</strong> <p id="eventDescription"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Add Event Modal -->
+  <div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="addEventModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addEventModalLabel">Add New Event</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addEventForm">
+                    <div class="form-group">
+                        <label for="eventTitleInput">Title*</label>
+                        <input type="text" class="form-control" id="eventTitleInput" required>
+                    </div>
+                    
+                    <!-- Hidden field for event ID during edit operations -->
+                    <input type="hidden" id="eventIdInput">
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="eventOrganizationInput">Organization*</label>
+                            <select class="form-control" id="eventOrganizationInput" required>
+                                <option value="">Select Organization</option>
+                                <!-- Organizations will be loaded dynamically -->
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="eventCategoryInput">Category*</label>
+                            <select class="form-control" id="eventCategoryInput" required>
+                                <option value="">Select Category</option>
+                                <!-- Categories will be loaded dynamically based on organization -->
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="eventStartDateInput">Start Date*</label>
+                            <input type="date" class="form-control" id="eventStartDateInput" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="eventStartTimeInput">Start Time</label>
+                            <input type="time" class="form-control" id="eventStartTimeInput">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="eventEndDateInput">End Date</label>
+                            <input type="date" class="form-control" id="eventEndDateInput">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="eventEndTimeInput">End Time</label>
+                            <input type="time" class="form-control" id="eventEndTimeInput">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="eventAllDayInput">
+                            <label class="form-check-label" for="eventAllDayInput">
+                                All Day Event
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="eventLocationInput">Location</label>
+                            <input type="text" class="form-control" id="eventLocationInput">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="eventTypeInput">Event Type</label>
+                            <select class="form-control" id="eventTypeInput">
+                                <option value="other">Other</option>
+                                <option value="goal">Goal</option>
+                                <option value="checkpoint">Checkpoint</option>
+                                <option value="deadline">Deadline</option>
+                                <option value="meeting">Meeting</option>
+                                <option value="class">Class</option>
+                                <option value="exam">Exam</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="eventPriorityInput">Priority</label>
+                            <select class="form-control" id="eventPriorityInput">
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                                <option value="high">High</option>
+                                <option value="critical">Critical</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="eventStatusInput">Status</label>
+                            <select class="form-control" id="eventStatusInput">
+                                <option value="planned">Planned</option>
+                                <option value="in_progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                                <option value="delayed">Delayed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventDescriptionInput">Description</label>
+                        <textarea class="form-control" id="eventDescriptionInput" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveEventButton">Save Event</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- start footer Area -->
+  <footer class="footer-area section-gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="single-footer-widget">
+                    <h4>About Us</h4>
+                    <p>
+                        Mentee College is dedicated to providing high-quality education in healthcare fields.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="single-footer-widget">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="Application.html">Program Applications</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="single-footer-widget">
+                    <h4>Contact Information</h4>
+                    <p>
+                        <strong>Address:</strong> 1700 Northside Drive N.W., Suite A7, Atlanta, GA 30318<br>
+                        <strong>Phone:</strong> (770) 931-5020<br>
+                        <strong>Email:</strong> admissions@menteecollege.com
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom row align-items-center justify-content-between">
+            <p class="footer-text m-0 col-lg-6 col-md-12">
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Mentee College
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+        </div>
+    </div>
+  </footer>
+  <!-- End footer Area -->
+
+  <!-- JavaScript Libraries -->
+  <script src="js/vendor/jquery-2.2.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="js/vendor/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/easing.min.js"></script>
+  <script src="js/hoverIntent.js"></script>
+  <script src="js/superfish.min.js"></script>
+  <script src="js/jquery.ajaxchimp.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/jquery.tabs.min.js"></script>
+  <script src="js/jquery.nice-select.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/mail-script.js"></script>
+  <script src="js/main.js"></script>
+  
+  <!-- FullCalendar JavaScript -->
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
+  
+  <!-- Custom Calendar JavaScript -->
+  <script src="js/calendar.js"></script>
+  
+  <script>
+    // Show login or logout button based on authentication status
+    document.addEventListener('DOMContentLoaded', function() {
+        const accessToken = localStorage.getItem('accessToken');
+        const username = localStorage.getItem('username');
+        const loginButton = document.getElementById('loginButton');
+        const logoutButton = document.getElementById('logoutButton');
+        const addEventButton = document.getElementById('addEventButton');
+        
+        if (accessToken && username) {
+            // User is logged in, show logout button and add event button
+            loginButton.style.display = 'none';
+            logoutButton.style.display = 'inline-block';
+            addEventButton.style.display = 'inline-block';
+            
+            logoutButton.addEventListener('click', function() {
+                // Clear authentication data
+                localStorage.removeItem('accessToken');
+                localStorage.removeItem('refreshToken');
+                localStorage.removeItem('username');
+                // Reload the page
+                window.location.reload();
+            });
+            
+            // Add event button click handler
+            addEventButton.addEventListener('click', function() {
+                // Set default date values to today
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('eventStartDateInput').value = today;
+                document.getElementById('eventEndDateInput').value = today;
+                
+                // Show the add event modal
+                $('#addEventModal').modal('show');
+            });
+        } else {
+            // User is not logged in, show login button
+            loginButton.style.display = 'inline-block';
+            logoutButton.style.display = 'none';
+            addEventButton.style.display = 'none';
+        }
+    });
+  </script>
+</body>
+</html> 

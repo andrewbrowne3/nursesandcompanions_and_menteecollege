@@ -1,0 +1,156 @@
+/* Bill Card */
+.bill-card {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+  height: auto;
+}
+
+/* Bill Content */
+.bill-content {
+  padding: 20px !important;
+}
+
+/* Balance Summary */
+.balance-summary {
+  margin-bottom: 20px;
+}
+
+.balance-info {
+  text-align: center;
+  margin-bottom: 24px;
+  padding: 16px;
+  background-color: var(--gray-50);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+}
+
+.balance-info:hover {
+  background-color: var(--gray-100);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.balance-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 8px !important;
+  color: var(--gray-600) !important;
+}
+
+.balance-amount {
+  font-weight: 700 !important;
+  color: var(--primary-dark) !important;
+  margin: 8px 0 !important;
+}
+
+.due-date-chip {
+  margin-top: 8px !important;
+}
+
+/* Payment Summary */
+.payment-summary {
+  background-color: var(--white);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.payment-summary:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.payment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.payment-label {
+  color: var(--gray-600) !important;
+}
+
+.payment-value {
+  font-weight: 600 !important;
+}
+
+.payment-value.credit {
+  color: var(--success) !important;
+}
+
+.payment-divider {
+  margin: 12px 0 !important;
+}
+
+.payment-item.total {
+  margin-top: 12px;
+}
+
+.payment-item.total .payment-label {
+  color: var(--gray-900) !important;
+  font-weight: 600 !important;
+}
+
+.payment-item.total .payment-value {
+  color: var(--primary-dark) !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+}
+
+/* Bill Actions */
+.bill-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.pay-bill-button {
+  background-color: var(--primary-color) !important;
+  color: var(--white) !important;
+  padding: 10px !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: all var(--transition-normal) !important;
+}
+
+.pay-bill-button:hover {
+  background-color: var(--primary-dark) !important;
+  box-shadow: var(--shadow-md) !important;
+  transform: translateY(-2px);
+}
+
+.payment-plan-button {
+  border-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+  padding: 9px !important;
+  transition: all var(--transition-normal) !important;
+}
+
+.payment-plan-button:hover {
+  background-color: rgba(25, 118, 210, 0.08) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transform: translateY(-2px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .bill-card {
+    max-width: 100%;
+  }
+  
+  .dashboard-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .semester-badge {
+    align-self: flex-start;
+  }
+}

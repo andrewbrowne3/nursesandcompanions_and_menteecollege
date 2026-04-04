@@ -1,0 +1,147 @@
+/* Financial Aid Card */
+.financial-aid-card {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+  height: auto;
+}
+
+/* Financial Aid Content */
+.financial-aid-content {
+  padding: 20px !important;
+}
+
+/* Aid Summary */
+.aid-summary {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.aid-summary-title {
+  color: var(--gray-600) !important;
+  margin-bottom: 8px !important;
+}
+
+.aid-total-amount {
+  font-weight: 700 !important;
+  color: var(--accent-color) !important;
+  margin: 8px 0 16px !important;
+}
+
+.aid-divider {
+  margin: 16px 0 !important;
+}
+
+/* Aid List */
+.aid-list {
+  margin-bottom: 24px !important;
+  padding: 0 !important;
+}
+
+.aid-item {
+  padding: 12px !important;
+  margin-bottom: 12px !important;
+  border-radius: var(--radius-md) !important;
+  background-color: var(--gray-50) !important;
+  transition: all var(--transition-normal) !important;
+}
+
+.aid-item:hover {
+  background-color: var(--gray-100) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transform: translateY(-2px);
+}
+
+.aid-item.approved {
+  border-left: 4px solid var(--success) !important;
+}
+
+.aid-item.pending {
+  border-left: 4px solid var(--warning) !important;
+}
+
+.aid-item-icon {
+  min-width: 36px !important;
+}
+
+.aid-item-name {
+  font-weight: 600 !important;
+  color: var(--gray-900) !important;
+}
+
+.aid-item-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.aid-item-amount {
+  font-weight: 600 !important;
+  color: var(--accent-color) !important;
+}
+
+.aid-status-chip {
+  font-size: 0.75rem !important;
+  height: 24px !important;
+}
+
+/* Financial Aid Actions */
+.financial-aid-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.view-awards-button {
+  background-color: var(--accent-color) !important;
+  color: var(--white) !important;
+  padding: 10px !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: all var(--transition-normal) !important;
+}
+
+.view-awards-button:hover {
+  background-color: var(--accent-dark) !important;
+  box-shadow: var(--shadow-md) !important;
+  transform: translateY(-2px);
+}
+
+.apply-aid-button {
+  border-color: var(--accent-color) !important;
+  color: var(--accent-color) !important;
+  padding: 9px !important;
+  transition: all var(--transition-normal) !important;
+}
+
+.apply-aid-button:hover {
+  background-color: rgba(0, 121, 107, 0.08) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transform: translateY(-2px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .financial-aid-card {
+    max-width: 100%;
+  }
+  
+  .dashboard-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .semester-badge {
+    align-self: flex-start;
+  }
+  
+  .aid-item-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+
+

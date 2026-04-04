@@ -1,0 +1,37 @@
+
+
+
+
+menteecollegewebsite/mentee_college_online_school/migrations
+menteecollegewebsite/db.sqlite3
+menteecollegewebsite/django_error.log
+# General Python ignores
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.ipynb_checkpoints
+*.env
+*.DS_Store
+
+# Django specific ignores
+/db.sqlite3
+/django_error.log
+# Ignore all migration files within all migrations directories
+**/migrations/*.py
+# Except the __init__.py file to keep the directory recognized as a Python package
+!**/migrations/__init__.py
+
+# If you have specific files or directories to ignore in a Django app, specify them like so:
+# myapp/some_directory/
+# myapp/some_file.txt
+
+# Log files
+*.log
+
+# If using a virtual environment, exclude it as well
+venv/
+.env/
+
+# Other database files, specify as needed
+# /path/to/other/database/files

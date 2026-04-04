@@ -1,0 +1,27 @@
+
+GENERAL
+-------
+Comments for Mentee College are prefixed with "MenteeCollegeComment - "
+comments are in the the following modules
+1. index.html
+2. _home.scss
+3. main.css
+
+NOTE: Get longitude and latitude of Google maps from this site = https://www.latlong.net/convert-address-to-lat-long.html
+
+
+
+index.html
+
+The background picture at the top is a jpg called "top-banner"
+It is located at img/top-banner.jpg
+Its dimensions in pixels are W=1920, H=390
+It is referenced in the main.css 
+It is also referenced at scss/theme/_home.scss
+
+
+Images in Popular courses we offer are p1.jpg, p2.jpg, p3.jpg, and p4.jpg in the img folder with hights of 200 pixels.
+Their widths in pixels are 263, 262, 262, 262 respectively.
+
+ 
+ 

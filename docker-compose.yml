@@ -1,0 +1,61 @@
+services:
+  # ---------- Django HTTP (Gunicorn) ----------
+  backend-http:
+    build:
+      context: ./menteeCollegePortal/menteecollegewebsite
+      dockerfile: Dockerfile
+    command: gunicorn menteecollegewebsite.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120
+    ports:
+      - "127.0.0.1:8010:8000"
+    volumes:
+      - sqlite-data:/data/db
+      - ./menteeCollegePortal/menteecollegewebsite/staticfiles:/app/staticfiles
+      - ./menteeCollegePortal/menteecollegewebsite/media:/app/media
+    env_file:
+      - ./menteeCollegePortal/menteecollegewebsite/menteecollegewebsite/.env
+    environment:
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+    restart: unless-stopped
+    networks:
+      - internal
+
+  # ---------- Django WebSocket (Daphne) ----------
+  backend-ws:
+    build:
+      context: ./menteeCollegePortal/menteecollegewebsite
+      dockerfile: Dockerfile
+    command: daphne -b 0.0.0.0 -p 8002 menteecollegewebsite.asgi:application
+    ports:
+      - "127.0.0.1:8012:8002"
+    volumes:
+      - sqlite-data:/data/db
+      - ./menteeCollegePortal/menteecollegewebsite/staticfiles:/app/staticfiles
+      - ./menteeCollegePortal/menteecollegewebsite/media:/app/media
+    env_file:
+      - ./menteeCollegePortal/menteecollegewebsite/menteecollegewebsite/.env
+    environment:
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+    restart: unless-stopped
+    networks:
+      - internal
+
+  # ---------- Redis ----------
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - internal
+
+volumes:
+  sqlite-data:
+  redis-data:
+
+networks:
+  internal:
+    driver: bridge

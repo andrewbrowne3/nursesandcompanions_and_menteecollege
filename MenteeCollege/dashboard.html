@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard - Mentee College</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts - Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Dashboard CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    
+    <!-- Common CSS (header, footer, etc.) -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <div class="dashboard-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="dashboard-title">Financial KPI Dashboard</h1>
+                    <p class="dashboard-subtitle">Monitor application metrics and revenue performance</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <span id="currentDate" class="text-white"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Loading and Error Messages -->
+        <div id="loadingMessage" class="loading-message" style="display: none;">
+            <i class="fas fa-spinner fa-spin me-2"></i> Loading dashboard data...
+        </div>
+        
+        <div id="errorMessage" class="error-message" style="display: none;">
+            Error loading dashboard data. Please try again later.
+        </div>
+        
+        <!-- Dashboard Intro -->
+        <div class="dashboard-section">
+            <div class="row">
+                <div class="col-12">
+                    <div class="dashboard-card">
+                        <h4><i class="fas fa-chart-line me-2 text-primary"></i> Financial KPI Overview</h4>
+                        <p>This dashboard provides insights into the financial performance of Mentee College, tracking key metrics for applications, enrollments, and revenue. Use this data to monitor trends and make informed decisions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Revenue Metrics -->
+        <div class="dashboard-section">
+            <h3>Revenue Metrics</h3>
+            
+            <div class="row">
+                <!-- Total Revenue -->
+                <div class="col-md-4">
+                    <div class="dashboard-card revenue-card">
+                        <div class="metric-card">
+                            <i class="fas fa-dollar-sign metric-icon text-success"></i>
+                            <div class="metric-value revenue-value" id="totalRevenue">$0.00</div>
+                            <div class="metric-label">Total Revenue (12 mo.)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Payment Count -->
+                <div class="col-md-4">
+                    <div class="dashboard-card revenue-card">
+                        <div class="metric-card">
+                            <i class="fas fa-credit-card metric-icon text-primary"></i>
+                            <div class="metric-value" id="paymentCount">0</div>
+                            <div class="metric-label">Total Payments</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Average Payment -->
+                <div class="col-md-4">
+                    <div class="dashboard-card revenue-card">
+                        <div class="metric-card">
+                            <i class="fas fa-calculator metric-icon text-info"></i>
+                            <div class="metric-value" id="averagePayment">$0.00</div>
+                            <div class="metric-label">Average Payment</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <!-- Monthly Revenue Chart -->
+                <div class="col-md-8">
+                    <div class="dashboard-card">
+                        <h5>Monthly Revenue Trend</h5>
+                        <div class="chart-container">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Revenue by Program Chart -->
+                <div class="col-md-4">
+                    <div class="dashboard-card">
+                        <h5>Revenue by Program Type</h5>
+                        <div class="chart-container">
+                            <canvas id="revenueProgramChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Application Metrics -->
+        <div class="dashboard-section">
+            <h3>Application Metrics</h3>
+            
+            <div class="row">
+                <!-- Monthly Applications Chart -->
+                <div class="col-md-8">
+                    <div class="dashboard-card applications-card">
+                        <h5>Application Trends by Program</h5>
+                        <div class="chart-container">
+                            <canvas id="applicationsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Application Source Chart -->
+                <div class="col-md-4">
+                    <div class="dashboard-card applications-card">
+                        <h5>How Applicants Heard About Us</h5>
+                        <div class="chart-container">
+                            <canvas id="applicationSourceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Conversion Metrics -->
+        <div class="dashboard-section">
+            <h3>Conversion Metrics</h3>
+            
+            <div class="row">
+                <!-- Enrollment Rate -->
+                <div class="col-md-4">
+                    <div class="dashboard-card conversion-card">
+                        <div class="metric-card">
+                            <i class="fas fa-user-graduate metric-icon text-primary"></i>
+                            <div class="metric-value" id="enrollmentRate">0%</div>
+                            <div class="metric-label">Application to Enrollment Rate</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Payment Rate -->
+                <div class="col-md-4">
+                    <div class="dashboard-card conversion-card">
+                        <div class="metric-card">
+                            <i class="fas fa-money-check-alt metric-icon text-success"></i>
+                            <div class="metric-value" id="paymentRate">0%</div>
+                            <div class="metric-label">Enrollment to Payment Rate</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Overall Conversion -->
+                <div class="col-md-4">
+                    <div class="dashboard-card conversion-card">
+                        <div class="metric-card">
+                            <i class="fas fa-exchange-alt metric-icon text-warning"></i>
+                            <div class="metric-value" id="overallConversion">0%</div>
+                            <div class="metric-label">Overall Conversion Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <!-- Conversion by Program Chart -->
+                <div class="col-md-7">
+                    <div class="dashboard-card">
+                        <h5>Conversion Rates by Program</h5>
+                        <div class="chart-container">
+                            <canvas id="conversionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Enrollment Funnel Chart -->
+                <div class="col-md-5">
+                    <div class="dashboard-card">
+                        <h5>Enrollment Funnel</h5>
+                        <div class="chart-container">
+                            <canvas id="funnelChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Program Popularity -->
+        <div class="dashboard-section">
+            <h3>Program Popularity</h3>
+            
+            <div class="row">
+                <!-- Popular Programs Chart -->
+                <div class="col-md-6">
+                    <div class="dashboard-card programs-card">
+                        <h5>Most Popular Programs</h5>
+                        <div class="chart-container">
+                            <canvas id="popularProgramsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Revenue by Course Chart -->
+                <div class="col-md-6">
+                    <div class="dashboard-card programs-card">
+                        <h5>Top Revenue-Generating Courses</h5>
+                        <div class="chart-container">
+                            <canvas id="revenueCoursesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="dashboard-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="footer-title">About Mentee College</h5>
+                    <p>Mentee College is dedicated to providing affordable, quality education in healthcare and related fields. Our mission is to empower students to achieve their career goals through accessible education.</p>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="about.html" class="footer-link">About Us</a>
+                    <a href="programs.html" class="footer-link">Programs</a>
+                    <a href="admissions.html" class="footer-link">Admissions</a>
+                    <a href="contact.html" class="footer-link">Contact</a>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5 class="footer-title">Programs</h5>
+                    <a href="#" class="footer-link">Diploma Programs</a>
+                    <a href="#" class="footer-link">Certificate Programs</a>
+                    <a href="#" class="footer-link">Associate Degrees</a>
+                    <a href="#" class="footer-link">Continuing Education</a>
+                </div>
+                
+                <div class="col-lg-4 col-md-4 mb-4">
+                    <h5 class="footer-title">Contact Us</h5>
+                    <div class="footer-contact"><i class="fas fa-map-marker-alt me-2"></i> 3545 Cruse Rd NW, Suite 100<br>Lawrenceville, GA 30044</div>
+                    <div class="footer-contact"><i class="fas fa-phone me-2"></i> (770) 931-5020</div>
+                    <div class="footer-contact"><i class="fas fa-envelope me-2"></i> admissions@menteecollege.com</div>
+                    <div class="mt-3">
+                        <a href="#" class="footer-social"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="footer-social"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-social"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; 2023 Mentee College. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom Dashboard JS -->
+    <script src="js/dashboard.js"></script>
+    
+    <script>
+        // Display current date
+        const now = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', options);
+    </script>
+</body>
+</html> 

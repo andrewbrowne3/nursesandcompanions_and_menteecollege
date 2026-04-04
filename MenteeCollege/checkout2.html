@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Student Payment Portal | Mentee College</title>
+    <meta name="description" content="Complete your payment for Mentee College healthcare training programs. Secure payment processing for CNA, practical nurse, and medical assistant courses." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Mentee College" />
+    <link rel="canonical" href="https://menteecollege.com/checkout2.html" />
+    <link rel="stylesheet" href="css/checkout.css" />
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="js/checkout.js" defer></script>
+   
+  </head>
+  <body id="Background">
+    <div class="flex-container">
+      <div class="info-group">
+        
+        <h3 id="greeting"></h3>
+        <div class="separatediv">
+          <ul id="courseList"></ul>
+          <div id="totalAmountDue"></div>
+          <div id="totalAmountPaid"></div>
+          <!-- Add these inside your body tag where appropriate -->
+       
+        
+
+        </div>
+      </div>
+      <div id="loadingPaymentForm" style="display: none;">Retrieving Student Payment Form...</div>
+      <form id="payment-form">
+        <div id="payment-element"></div>
+        <button id="submit">
+          <div class="spinner hidden" id="spinner"></div>
+          <span id="button-text">Pay now</span>
+        </button>
+        <div id="payment-message" class="hidden"></div>
+      </form>
+    </div>
+    <script src="js/cookieConsent.js"></script>
+  </body>
+  
+</html>

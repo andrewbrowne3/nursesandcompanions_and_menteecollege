@@ -1,0 +1,93 @@
+BODY { background-color:#FFFFFF; margin-bottom:0px; margin-left:0px; margin-right:0px; margin-top:0px; padding:0px; padding-left:0px; padding-bottom:0px; padding-right:0px; padding-top:0px; }
+INPUT { background-color:#B7C7EF; font-family:Verdana,Tahoma,Arial; font-size:8pt; color:#000000; }
+SELECT { background-color:#B7C7EF; font-family:Verdana,Tahoma,Arial; font-size:8pt; color:#000000; }
+
+#title { font-family: Verdana, Tahoma, Arial; font-size:11pt; color:#FFFFFF; font-weight: bold; }
+#title a { font-family: Verdana, Tahoma, Arial; font-size:11pt; color:#FFFFFF; font-weight: bold; text-decoration:none; }
+#title a:hover { font-family: Verdana, Tahoma, Arial; font-size:11pt; color:#FFB31A; font-weight: bold; text-decoration:none; }
+
+#menu { font-family:Verdana,Tahoma,Arial; font-size:8pt; font-weight: bold; color:#FFF; }
+#menu a { text-decoration: none; }
+#menu a:hover { text-decoration: underline; }
+
+#nav { background-color:#6487DC; }
+#nav input { font-family:Verdana,Tahoma,Arial; font-size:8pt; font-weight:bold; color:#222222; background-color:#A4BEF3; }
+#nav select { font-family:Verdana,Tahoma,Arial; font-size:8pt; font-weight:normal; color:#222222; background-color:#A4BEF3; }
+#nav .navOn { background-color:#003399; padding: 2px 1px 2px 1px; border-right:1px solid #333333; border-top:1px solid #AAAAAA; border-left:1px solid #AAAAAA; }
+#nav .navOff { background-color:#6487DC; padding: 2px 1px 2px 1px; border-right:1px solid #333333; border-top:1px solid #AAAAAA; border-left:1px solid #AAAAAA; }
+#nav a { font-family:Verdana,Tahoma,Arial; font-size:8pt; font-weight: bold; color:#FFFFFF; text-decoration:none; }
+#nav a:hover { font-family:Verdana,Tahoma,Arial; font-size:8pt; font-weight: bold; color:#FFFFFF; text-decoration:none; }
+
+#calnav { background-color:#003399; }
+
+#date { font-family: Verdana, Tahoma, Arial; font-size:11pt; color:#000000; font-weight: bold; text-decoration:none; }
+#date a { font-family: Verdana, Tahoma, Arial; font-size:11pt; color:#000000; font-weight: bold; text-decoration:none; }
+#date a:hover { font-family: Verdana, Tahoma, Arial; font-size:11pt; color:#FFB31A; font-weight: bold; text-decoration:underline; }
+#date .month { font-size:8pt; }
+
+#dateCells td.active { background-color:#FFFFFF; border:1px solid #003399; }
+#dateCells td.empty { background-color:#FFFFFF; border:1px solid #DDDDDD; }
+#dateCells td.today { background-color:#FFEFCE; border:1px solid #FFB31A; }
+#dateCells td.weekend { background-color:#DDDDDD; border:1px solid #003399; }
+#dateCells td.calendar_header { background-color:#FFB31A; font-family: Verdana,Tahoma,Arial; font-size:10pt; color:#000000; font-weight: bolder; border:1px solid #003399; }
+#dateCells .weeknum { font-family: Verdana, Tahoma, Arial; font-size:8pt; color:#000000; }
+#dateCells .daynum { font-family: Verdana, Tahoma, Arial; font-size:8pt; color:#000000; }
+#dateCells a { text-decoration:none; }
+#dateCells a:hover { text-decoration:underline; }
+#dateCells .dayhead { font-family: Verdana, Tahoma, Arial; font-size:7pt; font-weight:bold; color:#000000; background-color:#FFB31A; height:100%; }
+#dateCells .daycell { font-family: Verdana, Tahoma, Arial; font-size:7pt; color:#000000; background-color:#FFFFFF; }
+#dateCells .daytime { font-family: Verdana, Tahoma, Arial; font-size:7pt; color:#000000; background-color:#A4BEF3; }
+
+#miniDateCells table { border:1px solid #003399; }
+#miniDateCells td.active { background-color:#FFFFFF; border:1px solid #003399; }
+#miniDateCells td.empty { background-color:#CCCCCC; border:1px solid #DDDDDD; }
+#miniDateCells td.full { font-family: Verdana, Tahoma, Arial; font-size:8pt; color:#000000; background-color:#FFEFCE; border:1px solid #FFB31A; }
+#miniDateCells td.header { background-color:#FFB31A; font-family: Verdana, Tahoma, Arial; font-size:8pt; color:#000000; font-weight: bold; }
+#miniDateCells td.monthHeader { background-color:#003399; }
+#miniDateCells .month { font-family: Verdana, Tahoma, Arial; font-size:8pt; color:#FFFFFF; font-weight: bold; text-decoration:none; }
+#miniDateCells .month:hover { font-family: Verdana, Tahoma, Arial; font-size:8pt; color:#FFFFFF; font-weight: bold; text-decoration:none; }
+#miniDateCells a { font-family: Verdana, Tahoma, Arial; font-size:8pt; color:#000000; text-decoration:none; }
+#miniDateCells a:hover { font-family: Verdana, Tahoma, Arial; font-size:8pt; color:#FFB31A; text-decoration:underline; }
+#miniDateCells .day { font-family: Verdana, Tahoma, Arial; font-size:8pt; color:#000000; text-decoration:none; }
+#miniDateCells .day:hover { font-family: Verdana, Tahoma, Arial; font-size:8pt; color:#000000; text-decoration:underline; }
+
+#midDateCells td.active { background-color:#FFFFFF; border:1px solid #003399; }
+#midDateCells td.empty { background-color:#CCCCCC; border:1px solid #DDDDDD; }
+#midDateCells td.full { background-color:#FFEFCE; border:1px solid #FFB31A; }
+#midDateCells td.header { background-color:#FFB31A; font-family: Verdana, Tahoma, Arial; font-size:10pt; color:#000000; font-weight: bold; }
+#midDateCells td.monthHeader { background-color:#003399; }
+#midDateCells .month { font-family: Verdana, Tahoma, Arial; font-size:12pt; color:#FFFFFF; font-weight: bold; text-decoration:none; }
+#midDateCells .month:hover { font-family: Verdana, Tahoma, Arial; font-size:12pt; color:#FFFFFF; font-weight: bold; text-decoration:none; }
+#midDateCells a { font-family: Verdana, Tahoma, Arial; font-size:10pt; color:#000000; font-weight:bold; text-decoration:none; }
+#midDateCells a:hover { font-family: Verdana, Tahoma, Arial; font-size:10pt; color:#FFB31A; font-weight:bold; text-decoration:underline; }
+#midDateCells .day { font-family: Verdana, Tahoma, Arial; font-size:10pt; color:#000000; font-weight:bold; text-decoration:none; }
+
+#eventDetails{ position:absolute; top:0px; left:0px; width:300px; border:1px solid #000000; padding:2px; background-color:#FFFFFF; visibility:hidden; z-index:1000; font-family:Verdana,Tahoma; font-size:9pt; color:#000000; }
+
+#generalBox table { font-family:Verdana,Tahoma,Arial; font-size:10pt; color:#000000; background-color:#FFFFFF; border:1px solid #000000; }
+#generalBox td { font-family:Verdana,Tahoma,Arial; font-size:10pt; color:#000000; background-color:#FFFFFF; }
+#generalBox .alttd { font-family:Verdana,Tahoma,Arial; font-size:10pt; color:#000000; background-color:#CFCFCF; }
+#generalBox .headtd { font-family:Verdana,Tahoma,Arial; font-size:10pt; font-weight:bold; color:#FFFFFF; background-color:#003399; }
+#generalBox INPUT { font-family:Verdana,Tahoma,Arial; font-size:10pt; color:#000000; background-color:#DDDDDD; }
+#generalBox SELECT { background-color:#DDDDDD; font-family:Verdana,Tahoma,Arial; font-size:8pt; color:#000000; }
+#generalBox a { font-family:Verdana,Tahoma,Arial; font-size:10pt; color:#000000; text-decoration:none; }
+#generalBox a:hover { font-family:Verdana,Tahoma,Arial; font-size:10pt; color:#FFB31A; text-decoration:underline; }
+#generalBox .error { color:#F00000; font-weight:bold; }
+#generalBox .menuLink { font-family:Verdana,Tahoma,Arial; font-size:10pt; color:#FFFFFF; text-decoration:none; }
+#generalBox .menuLink:hover { font-family:Verdana,Tahoma,Arial; font-size:10pt; color:#FFB31A; text-decoration:underline; }
+#generalBox .small { font-family:Verdana,Tahoma,Arial; font-size:8pt; color:#000000; }
+
+#events .calendar { background-color:#003399; font-family:Verdana,Tahoma,Arial; font-size:12pt; color:#FFFFFF; font-weight:bold; }
+#events .title { background-color:#6487DC; font-family:Verdana,Tahoma,Arial; font-size:12pt; color:#FFFFFF; font-weight:bold; }
+#events .heading { text-align:right; background-color:#CCCCCC; font-family:Verdana,Tahoma,Arial; font-size:10pt; color:#000000; font-weight:bold; }
+#events .data { background-color:#FFFFFF; font-family:Verdana,Tahoma,Arial; font-size:10pt; color:#000000; }
+#events a { font-family: Verdana, Tahoma, Arial; font-size:10pt; color:#000000; text-decoration:underline; }
+#events a:hover { font-family: Verdana, Tahoma, Arial; font-size:10pt; color:#FFB31A; text-decoration:underline; }
+
+#editorBox table { font-family:Verdana,Tahoma,Arial; font-size:10pt; color:#000000; background-color:#FFFFFF; border:none; }
+#editorBox .button { font-family:Verdana,Tahoma,Arial; font-size:10pt; color:#000000; background-color:#CCCCCC; border-right:1px solid #BBBBBB; border-bottom:1px solid #BBBBBB; cursor:pointer; }
+#editorBox TEXTAREA { font-family:Verdana,Tahoma,Arial; font-size:10pt; color:#000000; background-color:#DDDDDD; }
+
+#copyright { font-family:Verdana,Tahoma,Arial; font-size:7pt; color:#BBBBBB; }
+#copyright a { font-family:Verdana,Tahoma,Arial; font-size:7pt; color:#BBBBBB; text-decoration:none; }
+#copyright a:hover { font-family:Verdana,Tahoma,Arial; font-size:7pt; color:#FFB31A; text-decoration:underline; }

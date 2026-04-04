@@ -1,0 +1,21 @@
+# Robots.txt for Mentee College
+# https://menteecollege.com
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private directories
+Disallow: /calendar/admin/
+Disallow: /securimage/
+Disallow: /js/
+Disallow: /css/
+Disallow: /scss/
+
+# Disallow backup/old files
+Disallow: /*_before_*
+Disallow: /*_Org*
+Disallow: /*_NoACT*
+Disallow: /satact/
+
+# Sitemap location
+Sitemap: https://menteecollege.com/sitemap.xml

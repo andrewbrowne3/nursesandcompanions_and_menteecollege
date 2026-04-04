@@ -1,0 +1,1160 @@
+	<!DOCTYPE html>
+	{% load static %}
+	<html lang="eng" class="no-js" dir="ltr">
+	{% block head %}
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script data-ad-client="ca-pub-2577171347155176" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon-->
+		<link rel="shortcut icon" href="https://www.menteecollege.org/img/fav.png">
+		<link rel="shortcut icon" type="image/png" href="/static/img/favicon.ico"  sizes="16x16"/>
+		<!-- Author Meta -->
+		<meta name="author" content="Andrew Browne">
+		<!-- Meta Description -->
+		<meta name="description" content="
+		                                 CNA certification school for Phlebotomy, Medical Billing and Coding,
+		                                 Patient Care, EKG, Ultrasound and all Nurses Aide related training.  
+                                        ">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="
+	                                    Healthcare classes, Ultrasound training, Nursing Assistant Clinicals, 
+	 							     ">
+		<!-- meta character set -->
+				
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>{{title}}</title><!-- MenteeCollegeComment - This has been changed -->
+
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+			<!--
+			CSS
+			============================================= -->
+			<link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
+			<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+			<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+			<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+			<link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+			<link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+			<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+			<link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+			<link rel="stylesheet" href="{% static 'css/main.css' %}">
+			<link rel="stylesheet" href="{% static 'css/paypal.css' %}">
+			
+		</head>
+		{% endblock %}
+		<body>
+
+
+        
+
+
+
+
+		  <header id="header" id="home">
+	  		<div class="header-top">
+	  			<div class="container">
+			  		<div class="row">
+			  			<div class="col-lg-6 col-sm-6 col-8 header-top-left no-padding">
+			  					<ul>
+<!-- 			  				MenteeCollegeComment - commented out -->
+								<li><a href="{% url 'Home' %}"><b>Mentee College</b></a></li>
+								<li><a href="https://www.facebook.com/menteecollege"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="https://instagram.com"><i class="fa fa-instagram"></i></a></li> 
+<!-- 								<li><a href="#"><i class="fa fa-dribbble"></i></a></li> -->
+<!-- 								<li><a href="#"><i class="fa fa-behance"></i></a></li> -->
+			  				</ul>
+
+			  			</div>
+			  			<div class="col-lg-6 col-sm-6 col-4 header-top-right no-padding">
+			  				<a href="tel:770 931 5020"><span class="lnr lnr-phone-handset"></span> <span class="text"><b>Phone: (770) 931-5020</b></span></a>
+			  				<a href="mailto:admissions@menteecollege.org"><span class="lnr lnr-envelope"></span> <span class="text"><b>admissions@menteecollege.org</b></span></a>
+			  			</div>
+			  		</div>
+	  			</div>
+			</div>
+		    <div class="container main-menu">
+		    	<div class="row align-items-center justify-content-between d-flex">
+			      <div id="logo">
+<!-- 			        <a href="index.html"><img src="img/logo_mc.png" alt="" title="" /></a> -->
+			      </div>
+			      <nav id="nav-menu-container">
+			        <ul class="nav-menu">
+			          <li><a href="{% url 'Home' %}">Home</a></li>
+					 
+					  
+
+					  {% if request.user.is_authenticated %}
+					  <li><a href="">Moodle Portal</a></li>
+					  <li><a href="contact.html">Contact</a></li>
+					  <li><a href="{% url 'logout' %}">Logout</a></li>
+					  <li><a href="{% url 'Home' %}">Welcome {{user.first_name}} {{user.last_name}}</a></li>
+					  {% else %}
+					  <!-----<li> <a href="{% url 'login' %}">Login</a></li>------->
+					  
+					  <!-----<li><a href="contact.html">Contact</a></li>------->
+
+					  {% endif %}
+					   <!-- <li><a href="/calendar/calendar.php/" target="_blank" style="white-space:nowrap" width="237"   >Our Calendar</a></li> -->
+
+					<!--  <li><a href="/calendar/calendar.php/" style="white-space:nowrap" width="237"   >Our Calendar</a></li> -->
+						<!-- NOTE: To Update School Calendar go to the URL http://www.menteecollege.org/calendar/admin/index.php  -->
+
+			          <!-- <li><a href="about.html">About</a></li> -->
+<!-- 			          <li><a href="courses.html">Courses</a></li> -->
+<!-- 			          <li><a href="events.html">Events</a></li> -->
+			          <!-- <li><a href="gallery.html">Gallery</a></li> -->
+			          <!-- MenteeCollegeComment - START Comment out -->
+<!-- 			          <li class="menu-has-children"><a href="">Blog</a> -->
+<!-- 			            <ul> -->
+<!-- 			              <li><a href="blog-home.html">Blog Home</a></li> -->
+<!-- 			              <li><a href="blog-single.html">Blog Single</a></li> -->
+<!-- 			            </ul> -->
+<!-- 			          </li>	 -->
+<!-- 			          <li class="menu-has-children"><a href="">Pages</a> -->
+<!-- 			            <ul> -->
+<!-- 		              		<li><a href="course-details.html">Course Details</a></li>		 -->
+<!-- 		              		<li><a href="event-details.html">Event Details</a></li>		 -->
+<!-- 			                <li><a href="elements.html">Elements</a></li> -->
+<!-- 					          <li class="menu-has-children"><a href="">Level 2 </a> -->
+<!-- 					            <ul> -->
+<!-- 					              <li><a href="#">Item One</a></li> -->
+<!-- 					              <li><a href="#">Item Two</a></li> -->
+<!-- 					            </ul> -->
+<!-- 					          </li>					                		 -->
+<!-- 			            </ul> -->
+<!-- 			          </li>	-->
+				         <!-- MenteeCollegeComment - END Comment out -->
+			          
+
+			        </ul>
+			      </nav><!-- #nav-menu-container -->
+		    	</div>
+		    </div>
+		  </header><!-- #header -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<!-- start banner Area -->
+			<section class="banner-area relative" id="home">
+
+<!-- 		MenteeCollegeComment - a good link to understand the rgba color function is
+			https://developer.mozilla.org/en-US/docs/Web/CSS/background-color.  This is the
+			function used in the code below
+-->
+				<div class="overlay overlay-bg"></div>	<!-- MenteeCollegeComment - This darkens the top of the page -->
+				<div class="container">
+					<div class="row fullscreen d-flex align-items-center justify-content-between">
+						<div class="banner-content col-lg-9 col-md-12">
+						
+							<h1 class="text-uppercase">
+							<br>
+								Mentee College
+							</h1>
+							<p class="pt-10 pb-10">
+								Our mission and goal at Mentee College is “to serve our community educating our students with the necessary
+								knowledge and skills needed to become dedicated, caring and responsible members of the health care team.”
+
+							</p>
+							
+							<a href="http://menteemedicalinstitute.org/menteeCollegeApplication.jsp" class="primary-btn text-uppercase">Enrollment Application</a>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End banner Area -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
+
+			<!-- Start feature Area --><!-- MenteeCollegeComment - This feature area is common to the following pages 1.about.html  -->
+			<section class="feature-area">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="single-feature">
+								<div class="title">
+									<h4>Small class size</h4>
+								</div>
+								<div class="desc-wrap">
+									<p>
+										With our small class sizes, you get to know your instructor and get your questions answered promptly.
+										There is also enough time for everyone to engage in class discussions and connect with classmates.
+										<br><b>
+										Phone: (770) 931-5020 <br>
+										Fax:   (770) 674-2019</b>
+									</p>
+									 <!-- MenteeCollegeComment - Commented out -->
+<!-- 									<a href="#">Join Now</a>									 -->
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="single-feature">
+								<div class="title">
+									<h4>Hands on Learning</h4>
+								</div>
+								<div class="desc-wrap">
+									<p>
+										Our hands on learning allows you the use of materials and equipment used on the job.
+										It improves critical thinking and causes more program material to be retained. Most
+										importantly, the instructor's real-world experience and knowledge is directly transfered
+										to the student.
+										<br><b>
+										Phone: (770) 931-5020 <br>
+										Fax:   (770) 674-2019</b>
+									</p>
+									<!-- MenteeCollegeComment - Commented out -->
+<!-- 									<a href="#">Join Now</a>									 -->
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-4">
+							<div class="single-feature">
+								<div class="title">
+									<h4>Healthcare Affiliations</h4>
+								</div>
+								<div class="desc-wrap">
+									<p>
+										We are affiliated with Healthcare facilities that are looking for skilled workers.
+										<br><b>
+										Phone: (770) 931-5020 <br>
+										Fax:   (770) 674-2019</b>
+									</p>
+									<!-- MenteeCollegeComment - Commented out -->
+<!-- 									<a href="#">Join Now</a>									 -->
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+			<!-- End feature Area -->
+
+
+
+
+
+			{% block content %}
+
+
+
+
+
+			<!-- Start popular-course Area -->
+			<section class="popular-course-area section-gap">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							<div class="title text-center">
+								<h1 class="mb-10">Popular Courses we offer</h1>
+								<p><font color = darkred>WE PROVIDE THE BEST TRAINING TO GUARANTEE THE BEST SERVICE IN OUR COMMUNITY</font></p>
+								<h3 class="text-uppercase">
+									<br/>
+									<br/>
+									
+									New programs starting August 2023
+								<br/>
+								<br/>
+								
+									<div style="color: #f7631b;">
+									LPN and Diagnostic Medical Sonography
+										<br/>
+									Enroll Today!
+									</div>
+								</h3>
+								<br/>
+								<br/>
+								
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="active-popular-carusel">
+
+							<div class="single-popular-carusel">
+								<div class="thumb-wrap relative">
+									<div class="thumb relative">
+										<div class="overlay overlay-bg"></div>
+										<img class="img-fluid" src="{% static 'img/p1.jpg' %}" alt="">
+									</div>
+									<div class="meta d-flex justify-content-between">
+										<!-- <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p> -->
+										<h4></br></h4>
+									</div>
+								</div>
+								<div class="details">
+									<a href=>
+										<h4>
+											Licensed Practical Nursing
+										</h4>
+									</a>
+									<p>
+										Embark on an exciting journey towards a rewarding nursing career with Mentee College's comprehensive LPN course. Our program offers in-depth training in nursing principles, anatomy, physiology, pharmacology, and medical-surgical nursing. Develop essential practical skills in patient care and medication administration under the guidance of experienced instructors. By obtaining an LPN license through Mentee College, you'll unlock a world of opportunities with increased job prospects, competitive starting salaries, and the potential for career advancement. Join us and become a skilled and respected healthcare professional, making a positive impact on patients' lives.
+
+
+
+
+
+
+
+
+									</p>
+								</div>
+							</div>
+
+							<div class="single-popular-carusel">
+								<div class="thumb-wrap relative">
+									<div class="thumb relative">
+										<div class="overlay overlay-bg"></div>
+										<img class="img-fluid" src="{% static 'img/p2.jpg' %}" alt="">
+									</div>
+									<div class="meta d-flex justify-content-between">
+										<!-- <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p> -->
+										<h4></br></h4>
+									</div>
+								</div>
+								<div class="details">
+									<a href="{% url 'Home' %}">
+										<h4>
+											Nursing Assistant
+										</h4>
+									</a>
+									<p>
+										The objective of our Nursing Assistant Program is to prepare students with the knowledge,
+										skills and abilities essential for the provision of basic care to residents / patients in
+										health care settings. The program consists of various units of instruction, laboratory experience,
+										lecture, clinical / externship.  Upon satisfactory completion of training, students may
+										register with the State, and be qualified to assume entry level positions in a variety of health
+										care settings.
+									</p>
+								</div>
+							</div>
+
+							<div class="single-popular-carusel">
+								<div class="thumb-wrap relative">
+									<div class="thumb relative">
+										<div class="overlay overlay-bg"></div>
+										<img class="img-fluid" src="{% static 'img/p2.jpg' %}" alt="">
+									</div>
+									<div class="meta d-flex justify-content-between">
+										<!-- <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p> -->
+										<h4></br></h4>
+									</div>
+								</div>
+								<div class="details">
+									<a href="{% url 'Home' %}">
+										<h4>
+											Ultrasound Program
+										</h4>
+									</a>
+									<p>
+										Sonography uses sound waves to generate images for assessment and diagnosis of various medical
+										conditions. It is commonly associated with obstetrics and the use of sonographic imaging during
+										pregnancy, but this technology has many other applications in the diagnosis and treatment of
+										medical conditions throughout the body. Sonographers use special equipment to direct high frequency
+										sound waves into areas of the patient's body. Sonographers operate the equipment, which collects
+										reflected echoes and forms an image that may be videotaped, transmitted, or photographed for
+										interpretation and diagnosis by a physician. Sonographers begin by explaining the procedure to
+										the patient, as well as recording the medical history, laboratory results, and other imaging test
+										results pertinent to the examination. The patient is guided onto an imaging table and the
+										sonographer selects appropriate equipment settings. Frequently, the sonographer will direct the
+										patient to several different positions to optimize the images taken in the area of interest.
+									</p>
+								</div>
+							</div>
+							<div class="single-popular-carusel">
+								<div class="thumb-wrap relative">
+									<div class="thumb relative">
+										<div class="overlay overlay-bg"></div>
+										<img class="img-fluid" src="{% static 'img/p3.jpg' %}" alt="">
+									</div>
+									<div class="meta d-flex justify-content-between">
+										<!-- <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p> -->
+										<h4></br></h4>
+									</div>
+								</div>
+								<div class="details">
+									<a href="{% url 'Home' %}">
+										<h4>
+											Medical Assistant
+										</h4>
+									</a>
+									<p>
+										The Medical Assisting, MA program prepares the graduate to be a multifunctional practitioner, qualified to
+										perform advanced front office skills and the direct patient care clinical aspects of the physician’s office.
+										The program delivers practical experience in a selected healthcare environment. Graduates of this program
+										may find entry-level positions for office Medical Assistants, EKG Technicians, Phlebotomy Technicians, and
+										Unit/Ward clerks in a hospital setting. The focus of this training program is to in class provide the
+										students with the fundamental knowledge needed to perform through reinforced academic and occupational
+										knowledge, skills and attitudes required for a medical assistant.
+									</p>
+								</div>
+							</div>
+							<div class="single-popular-carusel">
+								<div class="thumb-wrap relative">
+									<div class="thumb relative">
+										<div class="overlay overlay-bg"></div>
+										<img class="img-fluid" src="{% static 'img/p4.jpg' %}" alt="">
+									</div>
+									<div class="meta d-flex justify-content-between">
+										<!-- <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p> -->
+										<h4></br></h4>
+									</div>
+								</div>
+								<div class="details">
+									<a href="{% url 'Home' %}">
+										<h4>
+											Patient Care
+										</h4>
+									</a>
+									<p>
+										The Patient Care Technician, PCT program trains the entry level healthcare student to perform nursing
+										assisting at an advanced level of skills and knowledge. Performing skills of catheter insertion, dressing
+										changes, electrocardiography, phlebotomy, and pre/postoperative care. The focus of the training program is
+										to provide in class the students with the comprehensive understanding of and skills to be able to perform
+										these essential nursing skills competently and safely in an active healthcare facility.
+									</p>
+								</div>
+							</div>
+
+
+							<div class="single-popular-carusel">
+								<div class="thumb-wrap relative">
+									<div class="thumb relative">
+										<div class="overlay overlay-bg"></div>
+										<img class="img-fluid" src="{% static 'img/p1.jpg' %}" alt="">
+									</div>
+									<div class="meta d-flex justify-content-between">
+										<!-- <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p> -->
+										<h4></br></h4>
+									</div>
+								</div>
+								<div class="details">
+									<a href="{% url 'Home' %}">
+										<h4>
+											EKG Technician
+										</h4>
+									</a>
+									<p>
+										The Electrocardiography Technician, EKG program is designed for individuals interested in pursuing an entry
+										level of career in a healthcare facility. The subjects covered are medical terminology as related to
+										cardiovascular technology, cardiac anatomy, physiology and electrophysiology, EKG interpretation and
+										arrhythmia recognition. In conjunction with theory, laboratory practice with successful skill performance is
+										also part of the curriculum; which provides the student(s) with hands on training. The focus of this
+										training program is to in class provide the students with the fundamental knowledge needed to perform an EKG
+										and recognize any abnormalities that reinforce academic and occupational knowledge, skills and attitudes
+										required for an EKG technician.
+
+									</p>
+								</div>
+							</div>
+
+							<div class="single-popular-carusel">
+								<div class="thumb-wrap relative">
+									<div class="thumb relative">
+										<div class="overlay overlay-bg"></div>
+										<img class="img-fluid" src="{% static 'img/p2.jpg' %}" alt="">
+									</div>
+									<div class="meta d-flex justify-content-between">
+										<!-- <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p> -->
+										<h4></br></h4>
+									</div>
+								</div>
+								<div class="details">
+									<a href="{% url 'Home' %}">
+										<h4>
+											Medical Billing and Coding
+										</h4>
+									</a>
+									<p>
+										The Medical Billing and Coding Specialist, MBCS program is designed for individuals interested in pursuing
+										professional level positions in the clinics, hospitals, insurance agencies, public health facilities,
+										doctor’s office, nursing homes, as well as being self employed. As a medical coder, you will be working with
+										patients, doctors, nurses and insurance companies to accurately code diagnoses and procedures on patient’s
+										medical records ensuring proper reimbursement The subjects covered are medical terminology as related to
+										basic human anatomy and physiology, diseases, disorders and the coding for accounts receivable and payable.
+										In conjunction with theory, laboratory practice with successful skill performance is also part of the
+										curriculum; which provides the student(s) with hands on training.
+									</p>
+								</div>
+							</div>
+							<div class="single-popular-carusel">
+								<div class="thumb-wrap relative">
+									<div class="thumb relative">
+										<div class="overlay overlay-bg"></div>
+										<img class="img-fluid" src="{% static 'img/p3.jpg' %}"alt="">
+									</div>
+									<div class="meta d-flex justify-content-between">
+										<!-- <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p> -->
+										<h4></br></h4>
+									</div>
+								</div>
+								<div class="details">
+									<a href="{% url 'Home' %}">
+										<h4>
+											Phlebotomy Technician
+										</h4>
+									</a>
+									<p>
+										The Phlebotomy Technician program trains the entry level healthcare student to work in an advanced skill
+										area of medical offices, outpatient laboratories, or hospitals infusion therapy nursing and/or the inpatient
+										laboratory department(s); in utilizing their primary responsibility of collecting blood specimens from
+										patients or clients for the purpose of laboratory analysis. The focus of this training program is to in
+										class provide the students with the technical skills and fundamental knowledge needed to perform
+										venipuncture completely and safely in the clinical lab and reinforce academic and occupational knowledge,
+										skills and attitudes required for a phlebotomist in an active healthcare institution.
+									</p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End popular-course Area -->
+
+
+			{% endblock %}
+
+
+
+
+
+
+
+
+			<!-- Start search-course Area -->
+<!-- 			<section class="search-course-area relative"> -->
+<!-- 				<div class="overlay overlay-bg"></div> -->
+<!-- 				<div class="container"> -->
+<!-- 					<div class="row justify-content-between align-items-center"> -->
+<!-- 						<div class="col-lg-6 col-md-6 search-course-left"> -->
+<!-- 							<h1 class="text-white"> -->
+<!-- 								Get reduced fee <br> -->
+<!-- 								during this Summer! -->
+<!-- 							</h1> -->
+<!-- 							<p> -->
+<!-- 								inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. -->
+<!-- 							</p> -->
+<!-- 							<div class="row details-content"> -->
+<!-- 								<div class="col single-detials"> -->
+<!-- 									<span class="lnr lnr-graduation-hat"></span> -->
+<!-- 									<a href="#"><h4>Expert Instructors</h4></a>		 -->
+<!-- 									<p> -->
+<!-- 										Usage of the Internet is becoming more common due to rapid advancement of technology and power. -->
+<!-- 									</p>						 -->
+<!-- 								</div> -->
+<!-- 								<div class="col single-detials"> -->
+<!-- 									<span class="lnr lnr-license"></span> -->
+<!-- 									<a href="#"><h4>Certification</h4></a>		 -->
+<!-- 									<p> -->
+<!-- 										Usage of the Internet is becoming more common due to rapid advancement of technology and power. -->
+<!-- 									</p>						 -->
+<!-- 								</div>								 -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-lg-4 col-md-6 search-course-right section-gap"> -->
+<!-- 							<form class="form-wrap" action="#"> -->
+<!-- 								<h4 class="text-white pb-20 text-center mb-30">Search for Available Course</h4>		 -->
+<!-- 								<input type="text" class="form-control" name="name" placeholder="Your Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Name'" > -->
+<!-- 								<input type="phone" class="form-control" name="phone" placeholder="Your Phone Number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Phone Number'" > -->
+<!-- 								<input type="email" class="form-control" name="email" placeholder="Your Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address'" > -->
+<!-- 								<div class="form-select" id="service-select"> -->
+<!-- 									<select> -->
+<!-- 										<option datd-display="">Choose Course</option> -->
+<!-- 										<option value="1">Course One</option> -->
+<!-- 										<option value="2">Course Two</option> -->
+<!-- 										<option value="3">Course Three</option> -->
+<!-- 										<option value="4">Course Four</option> -->
+<!-- 									</select> -->
+<!-- 								</div>									 -->
+<!-- 								<button class="primary-btn text-uppercase">Submit</button> -->
+<!-- 							</form> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div>	 -->
+<!-- 			</section> -->
+			<!-- End search-course Area -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<!-- Start upcoming-event Area -->
+<!-- 			<section class="upcoming-event-area section-gap"> -->
+<!-- 				<div class="container"> -->
+<!-- 					<div class="row d-flex justify-content-center"> -->
+<!-- 						<div class="menu-content pb-70 col-lg-8"> -->
+<!-- 							<div class="title text-center"> -->
+<!-- 								<h1 class="mb-10">Upcoming Events of our Institute</h1> -->
+<!-- 								<p>If you are a serious astronomy fanatic like a lot of us</p> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div>								 -->
+<!-- 					<div class="row"> -->
+<!-- 						<div class="active-upcoming-event-carusel"> -->
+<!-- 							<div class="single-carusel row align-items-center"> -->
+<!-- 								<div class="col-12 col-md-6 thumb"> -->
+<!-- 									<img class="img-fluid" src="img/e1.jpg" alt=""> -->
+<!-- 								</div> -->
+<!-- 								<div class="detials col-12 col-md-6"> -->
+<!-- 									<p>25th February, 2018</p> -->
+<!-- 									<a href="#"><h4>The Universe Through -->
+<!-- 									A Child S Eyes</h4></a> -->
+<!-- 									<p> -->
+<!-- 										For most of us, the idea of astronomy is something we directly connect to “stargazing”, telescopes and seeing magnificent displays in the heavens. -->
+<!-- 									</p> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="single-carusel row align-items-center"> -->
+<!-- 								<div class="col-12 col-md-6 thumb"> -->
+<!-- 									<img class="img-fluid" src="img/e2.jpg" alt=""> -->
+<!-- 								</div> -->
+<!-- 								<div class="detials col-12 col-md-6"> -->
+<!-- 									<p>25th February, 2018</p> -->
+<!-- 									<a href="#"><h4>The Universe Through -->
+<!-- 									A Child S Eyes</h4></a> -->
+<!-- 									<p> -->
+<!-- 										For most of us, the idea of astronomy is something we directly connect to “stargazing”, telescopes and seeing magnificent displays in the heavens. -->
+<!-- 									</p> -->
+<!-- 								</div> -->
+<!-- 							</div>	 -->
+<!-- 							<div class="single-carusel row align-items-center"> -->
+<!-- 								<div class="col-12 col-md-6 thumb"> -->
+<!-- 									<img class="img-fluid" src="img/e1.jpg" alt=""> -->
+<!-- 								</div> -->
+<!-- 								<div class="detials col-12 col-md-6"> -->
+<!-- 									<p>25th February, 2018</p> -->
+<!-- 									<a href="#"><h4>The Universe Through -->
+<!-- 									A Child S Eyes</h4></a> -->
+<!-- 									<p> -->
+<!-- 										For most of us, the idea of astronomy is something we directly connect to “stargazing”, telescopes and seeing magnificent displays in the heavens. -->
+<!-- 									</p> -->
+<!-- 								</div> -->
+<!-- 							</div>	 -->
+<!-- 							<div class="single-carusel row align-items-center"> -->
+<!-- 								<div class="col-12 col-md-6 thumb"> -->
+<!-- 									<img class="img-fluid" src="img/e1.jpg" alt=""> -->
+<!-- 								</div> -->
+<!-- 								<div class="detials col-12 col-md-6"> -->
+<!-- 									<p>25th February, 2018</p> -->
+<!-- 									<a href="#"><h4>The Universe Through -->
+<!-- 									A Child S Eyes</h4></a> -->
+<!-- 									<p> -->
+<!-- 										For most of us, the idea of astronomy is something we directly connect to “stargazing”, telescopes and seeing magnificent displays in the heavens. -->
+<!-- 									</p> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="single-carusel row align-items-center"> -->
+<!-- 								<div class="col-12 col-md-6 thumb"> -->
+<!-- 									<img class="img-fluid" src="img/e2.jpg" alt=""> -->
+<!-- 								</div> -->
+<!-- 								<div class="detials col-12 col-md-6"> -->
+<!-- 									<p>25th February, 2018</p> -->
+<!-- 									<a href="#"><h4>The Universe Through -->
+<!-- 									A Child S Eyes</h4></a> -->
+<!-- 									<p> -->
+<!-- 										For most of us, the idea of astronomy is something we directly connect to “stargazing”, telescopes and seeing magnificent displays in the heavens. -->
+<!-- 									</p> -->
+<!-- 								</div> -->
+<!-- 							</div>	 -->
+<!-- 							<div class="single-carusel row align-items-center"> -->
+<!-- 								<div class="col-12 col-md-6 thumb"> -->
+<!-- 									<img class="img-fluid" src="img/e1.jpg" alt=""> -->
+<!-- 								</div> -->
+<!-- 								<div class="detials col-12 col-md-6"> -->
+<!-- 									<p>25th February, 2018</p> -->
+<!-- 									<a href="#"><h4>The Universe Through -->
+<!-- 									A Child S Eyes</h4></a> -->
+<!-- 									<p> -->
+<!-- 										For most of us, the idea of astronomy is something we directly connect to “stargazing”, telescopes and seeing magnificent displays in the heavens. -->
+<!-- 									</p> -->
+<!-- 								</div> -->
+<!-- 							</div>																						 -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div>	 -->
+<!-- 			</section> -->
+			<!-- End upcoming-event Area -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<!-- Start review Area -->
+<!-- 			<section class="review-area section-gap relative"> -->
+<!-- 				<div class="overlay overlay-bg"></div> -->
+<!-- 				<div class="container">				 -->
+<!-- 					<div class="row"> -->
+<!-- 						<div class="active-review-carusel"> -->
+<!-- 							<div class="single-review item"> -->
+<!-- 								<div class="title justify-content-start d-flex"> -->
+<!-- 									<a href="#"><h4>Fannie Rowe</h4></a> -->
+<!-- 									<div class="star"> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star"></span> -->
+<!-- 										<span class="fa fa-star"></span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								<p> -->
+<!-- 									Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. -->
+<!-- 								</p> -->
+<!-- 							</div> -->
+<!-- 							<div class="single-review item"> -->
+<!-- 								<div class="title justify-content-start d-flex"> -->
+<!-- 									<a href="#"><h4>Hulda Sutton</h4></a> -->
+<!-- 									<div class="star"> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star"></span> -->
+<!-- 										<span class="fa fa-star"></span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								<p> -->
+<!-- 									Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. -->
+<!-- 								</p> -->
+<!-- 							</div> -->
+<!-- 							<div class="single-review item"> -->
+<!-- 								<div class="title justify-content-start d-flex"> -->
+<!-- 									<a href="#"><h4>Fannie Rowe</h4></a> -->
+<!-- 									<div class="star"> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star"></span> -->
+<!-- 										<span class="fa fa-star"></span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								<p> -->
+<!-- 									Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. -->
+<!-- 								</p> -->
+<!-- 							</div> -->
+<!-- 							<div class="single-review item"> -->
+<!-- 								<div class="title justify-content-start d-flex"> -->
+<!-- 									<a href="#"><h4>Hulda Sutton</h4></a> -->
+<!-- 									<div class="star"> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star"></span> -->
+<!-- 										<span class="fa fa-star"></span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								<p> -->
+<!-- 									Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. -->
+<!-- 								</p> -->
+<!-- 							</div>	 -->
+<!-- 							<div class="single-review item"> -->
+<!-- 								<div class="title justify-content-start d-flex"> -->
+<!-- 									<a href="#"><h4>Fannie Rowe</h4></a> -->
+<!-- 									<div class="star"> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star"></span> -->
+<!-- 										<span class="fa fa-star"></span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								<p> -->
+<!-- 									Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. -->
+<!-- 								</p> -->
+<!-- 							</div> -->
+<!-- 							<div class="single-review item"> -->
+<!-- 								<div class="title justify-content-start d-flex"> -->
+<!-- 									<a href="#"><h4>Hulda Sutton</h4></a> -->
+<!-- 									<div class="star"> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star"></span> -->
+<!-- 										<span class="fa fa-star"></span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								<p> -->
+<!-- 									Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. -->
+<!-- 								</p> -->
+<!-- 							</div> -->
+<!-- 							<div class="single-review item"> -->
+<!-- 								<img src="img/r1.png" alt=""> -->
+<!-- 								<div class="title justify-content-start d-flex"> -->
+<!-- 									<a href="#"><h4>Fannie Rowe</h4></a> -->
+<!-- 									<div class="star"> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star"></span> -->
+<!-- 										<span class="fa fa-star"></span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								<p> -->
+<!-- 									Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. -->
+<!-- 								</p> -->
+<!-- 							</div> -->
+<!-- 							<div class="single-review item"> -->
+<!-- 								<div class="title justify-content-start d-flex"> -->
+<!-- 									<a href="#"><h4>Hulda Sutton</h4></a> -->
+<!-- 									<div class="star"> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star checked"></span> -->
+<!-- 										<span class="fa fa-star"></span> -->
+<!-- 										<span class="fa fa-star"></span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								<p> -->
+<!-- 									Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. -->
+<!-- 								</p> -->
+<!-- 							</div>																												 -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div>	 -->
+<!-- 			</section> -->
+			<!-- End review Area -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<!-- Start cta-one Area -->
+<!-- 			<section class="cta-one-area relative section-gap"> -->
+<!-- 				<div class="container"> -->
+<!-- 					<div class="overlay overlay-bg"></div> -->
+<!-- 					<div class="row justify-content-center"> -->
+<!-- 						<div class="wrap"> -->
+<!-- 							<h1 class="text-white">Become an instructor</h1> -->
+<!-- 							<p> -->
+<!-- 								There is a moment in the life of any aspiring astronomer that it is time to buy that first telescope. It’s exciting to think about setting up your own viewing station whether that is on the deck. -->
+<!-- 							</p> -->
+<!-- 							<a class="primary-btn wh" href="#">Apply for the post</a>								 -->
+<!-- 						</div>					 -->
+<!-- 					</div> -->
+<!-- 				</div>	 -->
+<!-- 			</section> -->
+			<!-- End cta-one Area -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<!-- Start blog Area -->
+<!-- 			<section class="blog-area section-gap" id="blog"> -->
+<!-- 				<div class="container"> -->
+<!-- 					<div class="row d-flex justify-content-center"> -->
+<!-- 						<div class="menu-content pb-70 col-lg-8"> -->
+<!-- 							<div class="title text-center"> -->
+<!-- 								<h1 class="mb-10">Latest posts from our Blog</h1> -->
+<!-- 								<p>In the history of modern astronomy there is.</p> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div>					 -->
+<!-- 					<div class="row"> -->
+<!-- 						<div class="col-lg-3 col-md-6 single-blog"> -->
+<!-- 							<div class="thumb"> -->
+<!-- 								<img class="img-fluid" src="img/b1.jpg" alt="">								 -->
+<!-- 							</div> -->
+<!-- 							<p class="meta">25 April, 2018  |  By <a href="#">Mark Wiens</a></p> -->
+<!-- 							<a href="blog-single.html"> -->
+<!-- 								<h5>Addiction When Gambling Becomes A Problem</h5> -->
+<!-- 							</a> -->
+<!-- 							<p> -->
+<!-- 								Computers have become ubiquitous in almost every facet of our lives. At work, desk jockeys spend hours in front of their. -->
+<!-- 							</p> -->
+<!-- 							<a href="#" class="details-btn d-flex justify-content-center align-items-center"><span class="details">Details</span><span class="lnr lnr-arrow-right"></span></a>		 -->
+<!-- 						</div> -->
+<!-- 						<div class="col-lg-3 col-md-6 single-blog"> -->
+<!-- 							<div class="thumb"> -->
+<!-- 								<img class="img-fluid" src="img/b2.jpg" alt="">								 -->
+<!-- 							</div> -->
+<!-- 							<p class="meta">25 April, 2018  |  By <a href="#">Mark Wiens</a></p> -->
+<!-- 							<a href="blog-single.html"> -->
+<!-- 								<h5>Computer Hardware Desktops And Notebooks</h5> -->
+<!-- 							</a> -->
+<!-- 							<p> -->
+<!-- 								Ah, the technical interview. Nothing like it. Not only does it cause anxiety, but it causes anxiety for several different reasons.  -->
+<!-- 							</p> -->
+<!-- 							<a href="#" class="details-btn d-flex justify-content-center align-items-center"><span class="details">Details</span><span class="lnr lnr-arrow-right"></span></a>						 -->
+<!-- 						</div> -->
+<!-- 						<div class="col-lg-3 col-md-6 single-blog"> -->
+<!-- 							<div class="thumb"> -->
+<!-- 								<img class="img-fluid" src="img/b3.jpg" alt="">								 -->
+<!-- 							</div> -->
+<!-- 							<p class="meta">25 April, 2018  |  By <a href="#">Mark Wiens</a></p> -->
+<!-- 							<a href="blog-single.html"> -->
+<!-- 								<h5>Make Myspace Your Best Designed Space</h5> -->
+<!-- 							</a> -->
+<!-- 							<p> -->
+<!-- 								Plantronics with its GN Netcom wireless headset creates the next generation of wireless headset and other products such as wireless. -->
+<!-- 							</p> -->
+<!-- 							<a href="#" class="details-btn d-flex justify-content-center align-items-center"><span class="details">Details</span><span class="lnr lnr-arrow-right"></span></a>									 -->
+<!-- 						</div> -->
+<!-- 						<div class="col-lg-3 col-md-6 single-blog"> -->
+<!-- 							<div class="thumb"> -->
+<!-- 								<img class="img-fluid" src="img/b4.jpg" alt="">								 -->
+<!-- 							</div> -->
+<!-- 							<p class="meta">25 April, 2018  |  By <a href="#">Mark Wiens</a></p> -->
+<!-- 							<a href="blog-single.html"> -->
+<!-- 								<h5>Video Games Playing With Imagination</h5> -->
+<!-- 							</a> -->
+<!-- 							<p> -->
+<!-- 								About 64% of all on-line teens say that do things online that they wouldn’t want their parents to know about.   11% of all adult internet  -->
+<!-- 							</p> -->
+<!-- 							<a href="#" class="details-btn d-flex justify-content-center align-items-center"><span class="details">Details</span><span class="lnr lnr-arrow-right"></span></a>							 -->
+<!-- 						</div>							 -->
+<!-- 					</div> -->
+<!-- 				</div>	 -->
+<!-- 			</section> -->
+			<!-- End blog Area -->
+
+
+
+
+
+
+
+
+			<!-- Start cta-two Area -->
+<!-- 			<section class="cta-two-area"> -->
+<!-- 				<div class="container"> -->
+<!-- 					<div class="row"> -->
+<!-- 						<div class="col-lg-8 cta-left"> -->
+<!-- 							<h1>Not Yet Satisfied with our Trend?</h1> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-lg-4 cta-right"> -->
+<!-- 							<a class="primary-btn wh" href="#">view our blog</a> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div>	 -->
+<!-- 			</section> -->
+			<!-- End cta-two Area -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<!-- start footer Area -->
+			<footer class="footer-area section-gap">
+				<div class="container">
+					<!-- <div class="row">
+						<div class="col-lg-2 col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h4>Top Products</h4>
+								<ul>
+									<li><a href="#">Managed Website</a></li>
+									<li><a href="#">Manage Reputation</a></li>
+									<li><a href="#">Power Tools</a></li>
+									<li><a href="#">Marketing Service</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h4>Quick links</h4>
+								<ul>
+									<li><a href="#">Jobs</a></li>
+									<li><a href="#">Brand Assets</a></li>
+									<li><a href="#">Investor Relations</a></li>
+									<li><a href="#">Terms of Service</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h4>Features</h4>
+								<ul>
+									<li><a href="#">Jobs</a></li>
+									<li><a href="#">Brand Assets</a></li>
+									<li><a href="#">Investor Relations</a></li>
+									<li><a href="#">Terms of Service</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h4>Resources</h4>
+								<ul>
+									<li><a href="#">Guides</a></li>
+									<li><a href="#">Research</a></li>
+									<li><a href="#">Experts</a></li>
+									<li><a href="#">Agencies</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-4  col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h4>Newsletter</h4>
+								<p>Stay update with our latest</p>
+								<div class="" id="mc_embed_signup">
+									 <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get">
+									  <div class="input-group">
+									    <input type="text" class="form-control" name="EMAIL" placeholder="Enter Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email Address '" required="" type="email">
+									    <div class="input-group-btn">
+									      <button class="btn btn-default" type="submit">
+									        <span class="lnr lnr-arrow-right"></span>
+									      </button>
+									    </div>
+									    	<div class="info"></div>
+									  </div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div> -->
+
+
+
+
+
+
+					<div class="footer-bottom row align-items-center justify-content-between">
+						<p class="footer-text m-0 col-lg-6 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved Mentee College</p>
+						<!-- <div class="col-lg-6 col-sm-12 footer-social">
+							<a href="#"><i class="fa fa-facebook"></i></a>
+							<a href="#"><i class="fa fa-twitter"></i></a>
+							<a href="#"><i class="fa fa-dribbble"></i></a>
+							<a href="#"><i class="fa fa-behance"></i></a>
+						</div> -->
+					</div>
+				</div>
+			</footer>
+			<!-- End footer Area -->
+
+
+			<script src="{% static 'js/vendor/jquery-2.2.4.min.js'%}"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+			<script src="{% static 'js/vendor/bootstrap.min.js'%}"></script>
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+  			<script src="{% static 'js/easing.min.js'%}"></script>
+			<script src="{% static 'js/hoverIntent.js'%}"></script>
+			<script src="{% static 'js/superfish.min.js'%}"></script>
+			<script src="{% static 'js/jquery.ajaxchimp.min.js'%}"></script>
+			<script src="{% static 'js/jquery.magnific-popup.min.js'%}"></script>
+    		<script src="{% static 'js/jquery.tabs.min.js'%}"></script>
+			<script src="{% static 'js/jquery.nice-select.min.js'%}"></script>
+			<script src="{% static 'js/owl.carousel.min.js'%}"></script>
+			<script src="{% static 'js/mail-script.js'%}"></script>
+			<script src="{% static 'js/main.js'%}"></script>
+			<script src="{% static 'js/formSelector.js' %}"></script>
+			<script src="{% static 'js/programSelector.js' %}"></script>
+			<script src="{% static 'js/form_validation.js' %}"></script>
+
+		</body>
+	</html>

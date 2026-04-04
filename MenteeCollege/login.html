@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Mentee College">
+    <meta name="description" content="Access the Mentee College student portal. Login to view your courses, grades, and payment information for CNA, practical nurse, or medical assistant programs.">
+    <link rel="canonical" href="https://menteecollege.com/login.html">
+    <title>Student Portal Login | Mentee College Georgia</title>
+    <link rel="stylesheet" href="css/login.css" />
+</head>
+<body>
+    <form id="login-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value
+            };
+            
+            fetch('https://api.menteecollege.com/api/users/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    // If the server response is not ok, throw an error
+                    throw new Error('Login failed. Please check your username and password.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                // Store the access token, refresh token, and username in localStorage
+                localStorage.setItem('accessToken', data.access); // Assuming your API returns an 'access' token
+                localStorage.setItem('refreshToken', data.refresh); // Assuming your API returns a 'refresh' token
+                localStorage.setItem('username', data.username); // Save the username for later use
+                
+                // Check if the user came from the calendar page (using URL parameters)
+                const urlParams = new URLSearchParams(window.location.search);
+                const redirectTo = urlParams.get('redirect');
+                
+                // Redirect to the appropriate page after successful login
+                if (redirectTo === 'calendar') {
+                    window.location.href = 'calendar.html';
+                } else {
+                    window.location.href = 'checkout2.html';
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Display an alert with a generic error message
+                alert('Login failed. Please check your username and password.');
+            });
+        });
+    </script>
+    <script src="js/cookieConsent.js"></script>
+</body>
+</html>

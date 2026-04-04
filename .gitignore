@@ -1,0 +1,17 @@
+node_modules/
+__pycache__/
+*.pyc
+.env
+db.sqlite3
+*.sqlite3
+staticfiles/
+media/
+*.log
+.DS_Store
+_DS_Store
+
+# Python virtual environments
+menteeCollegePortal/menteecollegeportalenv/
+menteeCollegePortal/env/
+menteeCollegePortal/dashboardenv/
+menteeCollegePortal/menteecollegewebsite/env/

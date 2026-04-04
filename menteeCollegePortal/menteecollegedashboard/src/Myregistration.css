@@ -1,0 +1,219 @@
+.Registration-column{
+    margin-right: 15%;
+    height: 60%;
+    width: 50%;
+}
+
+.Registration-contents{
+    background-color: #edf0f3;
+    height: 60%;
+}
+
+
+
+
+.Registration-column {
+    height: 60%;
+    width: 60%;
+    background-color: #edf0f3; /* Light grey background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Adds shadow for depth */
+    transition: 0.3s; /* Smooth transition for hover effect */
+    padding: 20px; /* Padding inside the card */
+}
+
+.Registration-column:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3); /* Larger shadow when hovered */
+}
+
+.Registration-column h1 {
+    font-size: 24px; /* Larger font size for the title */
+    color: #333; /* Dark color for the title */
+    margin-bottom: 15px; /* Space below the title */
+}
+
+
+
+.Registration-contents-horizontal-stack {
+    display: flex;
+    font-size: 16px; /* Comfortable reading size for content */
+    color: #030507; /* Dark grey color for content */
+    line-height: 1.6; /* Spacing between lines */
+    flex-direction: row; /* Stack children vertically */
+    justify-content: space-between; /* Or space-around, space-evenly */
+    width: 95%;
+    height: 70%;
+}
+
+.Registration-contents-vertical-stack {
+    display: flex;
+    font-size: 16px; /* Comfortable reading size for content */
+    color: #030507; /* Dark grey color for content */
+    line-height: 1.6; /* Spacing between lines */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: space-between; /* Or space-around, space-evenly */
+    width: 95%;
+    height: 70%;
+}
+
+/* Registration Card */
+.registration-card {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+  height: auto;
+}
+
+/* Card Header */
+.dashboard-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: linear-gradient(120deg, var(--primary-light) 0%, var(--primary-color) 100%);
+  color: var(--white);
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+}
+
+.card-header-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-header-icon {
+  font-size: 1.5rem !important;
+}
+
+.semester-badge {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  font-weight: 500 !important;
+}
+
+/* Registration Content */
+.registration-content {
+  padding: 20px !important;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.view-schedule-btn {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: all var(--transition-normal) !important;
+}
+
+.view-schedule-btn:hover {
+  background-color: var(--primary-dark) !important;
+  box-shadow: var(--shadow-md) !important;
+  transform: translateY(-2px);
+}
+
+.edit-schedule-btn {
+  border-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+  transition: all var(--transition-normal) !important;
+}
+
+.edit-schedule-btn:hover {
+  background-color: rgba(25, 118, 210, 0.08) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transform: translateY(-2px);
+}
+
+/* Section Divider */
+.section-divider {
+  margin: 20px 0 !important;
+}
+
+/* Info Items */
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  background-color: var(--gray-50);
+  transition: all var(--transition-normal);
+}
+
+.info-item:hover {
+  background-color: var(--gray-100);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.info-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--gray-600) !important;
+  font-weight: 500 !important;
+}
+
+.info-value {
+  display: flex;
+  align-items: center;
+  font-weight: 600 !important;
+}
+
+.info-action {
+  display: flex;
+  gap: 8px;
+}
+
+.status-chip {
+  font-weight: 500 !important;
+}
+
+.good-status {
+  background-color: var(--success) !important;
+  color: white !important;
+}
+
+.gpa-value {
+  color: var(--primary-dark) !important;
+  font-weight: 700 !important;
+  font-size: 1.5rem !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .action-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .view-schedule-btn,
+  .edit-schedule-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .registration-card {
+    max-width: 100%;
+  }
+  
+  .dashboard-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .semester-badge {
+    align-self: flex-start;
+  }
+}
+

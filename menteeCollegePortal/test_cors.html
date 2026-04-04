@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORS Test for Mentee College API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 3px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>CORS Test for Mentee College API</h1>
+    
+    <div class="test-section">
+        <h2>Test 1: Simple GET Request</h2>
+        <button onclick="testSimpleGet()">Test Simple GET</button>
+        <div id="result1"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 2: GET Request with Credentials</h2>
+        <button onclick="testWithCredentials()">Test GET with Credentials</button>
+        <div id="result2"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 3: OPTIONS Preflight Request</h2>
+        <button onclick="testPreflight()">Test OPTIONS Request</button>
+        <div id="result3"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 4: POST Request with JSON</h2>
+        <button onclick="testPost()">Test POST Request</button>
+        <div id="result4"></div>
+    </div>
+
+    <script>
+        const API_URL = 'https://api.menteecollege.com';
+        
+        function testSimpleGet() {
+            const resultDiv = document.getElementById('result1');
+            resultDiv.innerHTML = 'Testing...';
+            
+            fetch(`${API_URL}/api/`)
+                .then(response => {
+                    const corsHeader = response.headers.get('Access-Control-Allow-Origin');
+                    resultDiv.innerHTML = `
+                        <span class="success">✓ Request successful!</span><br>
+                        Status: ${response.status}<br>
+                        CORS Header: ${corsHeader || 'Not set'}<br>
+                        <pre>${JSON.stringify(response.headers, null, 2)}</pre>
+                    `;
+                    return response.text();
+                })
+                .then(data => {
+                    resultDiv.innerHTML += `<br>Response: <pre>${data}</pre>`;
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = `<span class="error">✗ CORS Error:</span><br><pre>${error}</pre>`;
+                });
+        }
+        
+        function testWithCredentials() {
+            const resultDiv = document.getElementById('result2');
+            resultDiv.innerHTML = 'Testing...';
+            
+            fetch(`${API_URL}/api/`, {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+                .then(response => {
+                    const corsHeader = response.headers.get('Access-Control-Allow-Origin');
+                    const corsCredentials = response.headers.get('Access-Control-Allow-Credentials');
+                    resultDiv.innerHTML = `
+                        <span class="success">✓ Request successful!</span><br>
+                        Status: ${response.status}<br>
+                        CORS Origin: ${corsHeader || 'Not set'}<br>
+                        CORS Credentials: ${corsCredentials || 'Not set'}<br>
+                    `;
+                    return response.text();
+                })
+                .then(data => {
+                    resultDiv.innerHTML += `<br>Response: <pre>${data}</pre>`;
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = `<span class="error">✗ CORS Error:</span><br><pre>${error}</pre>`;
+                });
+        }
+        
+        function testPreflight() {
+            const resultDiv = document.getElementById('result3');
+            resultDiv.innerHTML = 'Testing...';
+            
+            fetch(`${API_URL}/api/`, {
+                method: 'OPTIONS',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Request-Method': 'POST',
+                    'Access-Control-Request-Headers': 'Content-Type',
+                }
+            })
+                .then(response => {
+                    const allowOrigin = response.headers.get('Access-Control-Allow-Origin');
+                    const allowMethods = response.headers.get('Access-Control-Allow-Methods');
+                    const allowHeaders = response.headers.get('Access-Control-Allow-Headers');
+                    
+                    resultDiv.innerHTML = `
+                        <span class="success">✓ Preflight successful!</span><br>
+                        Status: ${response.status}<br>
+                        Allow-Origin: ${allowOrigin || 'Not set'}<br>
+                        Allow-Methods: ${allowMethods || 'Not set'}<br>
+                        Allow-Headers: ${allowHeaders || 'Not set'}<br>
+                    `;
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = `<span class="error">✗ Preflight Error:</span><br><pre>${error}</pre>`;
+                });
+        }
+        
+        function testPost() {
+            const resultDiv = document.getElementById('result4');
+            resultDiv.innerHTML = 'Testing...';
+            
+            fetch(`${API_URL}/api/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ test: 'data' })
+            })
+                .then(response => {
+                    const corsHeader = response.headers.get('Access-Control-Allow-Origin');
+                    resultDiv.innerHTML = `
+                        <span class="success">✓ POST request successful!</span><br>
+                        Status: ${response.status}<br>
+                        CORS Header: ${corsHeader || 'Not set'}<br>
+                    `;
+                    return response.text();
+                })
+                .then(data => {
+                    resultDiv.innerHTML += `<br>Response: <pre>${data}</pre>`;
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = `<span class="error">✗ POST Error:</span><br><pre>${error}</pre>`;
+                });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+[Unit]
+Description=MenteeCollege & NursesAndCompanions Docker Compose
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/home/andrew/server/nursesandcompanions_and_menteecollege
+ExecStart=/usr/bin/docker compose up -d --build
+ExecStop=/usr/bin/docker compose down
+TimeoutStartSec=300
+
+[Install]
+WantedBy=multi-user.target

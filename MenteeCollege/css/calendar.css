@@ -1,0 +1,229 @@
+/* Calendar Styling for MenteeCollege */
+
+/* Calendar container */
+.calendar-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+}
+
+#calendar {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Calendar header */
+.fc-header-toolbar {
+    margin-bottom: 20px !important;
+}
+
+.fc-button-primary {
+    background-color: #f7631b !important;
+    border-color: #f7631b !important;
+}
+
+.fc-button-primary:hover {
+    background-color: #e55b18 !important;
+    border-color: #e55b18 !important;
+}
+
+.fc-button-active {
+    background-color: #d35116 !important;
+    border-color: #d35116 !important;
+}
+
+/* Event styling */
+.fc-event {
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 2px 4px;
+    margin: 1px 0;
+    font-size: 0.85em;
+}
+
+/* Priority colors */
+.priority-low {
+    border-left: 5px solid #28a745 !important;
+}
+
+.priority-medium {
+    border-left: 5px solid #ffc107 !important;
+}
+
+.priority-high {
+    border-left: 5px solid #dc3545 !important;
+}
+
+.priority-critical {
+    border-left: 5px solid #6610f2 !important;
+    font-weight: bold;
+}
+
+/* Status indicators */
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+}
+
+.status-planned {
+    background-color: #007bff;
+}
+
+.status-in_progress {
+    background-color: #ffc107;
+}
+
+.status-completed {
+    background-color: #28a745;
+}
+
+.status-delayed {
+    background-color: #dc3545;
+}
+
+.status-cancelled {
+    background-color: #6c757d;
+    text-decoration: line-through;
+}
+
+/* Filter container */
+.filter-container {
+    margin-bottom: 30px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+
+.filter-container select {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: white;
+}
+
+.filter-container select:focus {
+    outline: none;
+    border-color: #f7631b;
+}
+
+/* Authentication status */
+.login-status {
+    display: inline-block;
+    background-color: #f1f1f1;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.login-status span {
+    vertical-align: middle;
+}
+
+/* Auth buttons */
+.auth-buttons {
+    margin-top: 15px;
+}
+
+.auth-buttons .btn {
+    margin: 0 5px;
+}
+
+/* Event modal styling */
+#eventModal .modal-header, #addEventModal .modal-header {
+    background-color: #f7631b;
+    color: white;
+    border-radius: 5px 5px 0 0;
+}
+
+#eventModal .close, #addEventModal .close {
+    color: white;
+}
+
+#eventModal .event-detail {
+    margin-bottom: 12px;
+}
+
+#eventModal .event-detail strong {
+    display: inline-block;
+    min-width: 100px;
+    color: #444;
+}
+
+#eventModal #eventDescription {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+/* Add Event form styling */
+#addEventForm label {
+    font-weight: 500;
+    color: #444;
+}
+
+#addEventForm .form-control:focus {
+    border-color: #f7631b;
+    box-shadow: 0 0 0 0.2rem rgba(247, 99, 27, 0.25);
+}
+
+#addEventForm .form-group {
+    margin-bottom: 1rem;
+}
+
+#addEventModal .modal-footer .btn-primary {
+    background-color: #f7631b;
+    border-color: #f7631b;
+}
+
+#addEventModal .modal-footer .btn-primary:hover {
+    background-color: #e55b18;
+    border-color: #e55b18;
+}
+
+/* Required field indicator */
+#addEventForm label:after {
+    content: '*';
+    color: #dc3545;
+    margin-left: 3px;
+}
+
+#addEventForm label[for="eventLocationInput"]:after,
+#addEventForm label[for="eventTypeInput"]:after,
+#addEventForm label[for="eventPriorityInput"]:after,
+#addEventForm label[for="eventStatusInput"]:after,
+#addEventForm label[for="eventDescriptionInput"]:after,
+#addEventForm label[for="eventEndDateInput"]:after,
+#addEventForm label[for="eventEndTimeInput"]:after,
+#addEventForm label[for="eventStartTimeInput"]:after,
+#addEventForm .form-check-label:after {
+    content: '';
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .filter-container select {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .fc-header-toolbar {
+        flex-direction: column;
+    }
+    
+    .fc-header-toolbar .fc-toolbar-chunk {
+        margin-bottom: 10px;
+    }
+} 

@@ -1,0 +1,161 @@
+/* CourseManager.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.course-manager-container {
+  padding: 2rem 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.section-title {
+  color: #1976d2;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.section-description {
+  color: #757575;
+  margin-bottom: 2rem;
+}
+
+.filter-paper {
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.table-container {
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table-container table {
+  min-width: 650px;
+}
+
+.table-container th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+}
+
+.error-alert {
+  margin-bottom: 1.5rem;
+}
+
+/* Button styling */
+.MuiButton-containedPrimary {
+  background-color: #1976d2 !important;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.MuiButton-containedPrimary:hover {
+  background-color: #1565c0 !important;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(-2px);
+}
+
+.MuiButton-outlinedPrimary {
+  border-color: #1976d2 !important;
+  color: #1976d2 !important;
+  transition: all 0.3s ease !important;
+}
+
+.MuiButton-outlinedPrimary:hover {
+  background-color: rgba(25, 118, 210, 0.08) !important;
+  transform: translateY(-2px);
+}
+
+/* Dialog styling */
+.MuiDialog-paper {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+.MuiDialogTitle-root {
+  background-color: #1976d2 !important;
+  color: white !important;
+  padding: 16px 24px !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .course-manager-container {
+    padding: 1rem 0;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons button {
+    width: 100%;
+  }
+}
+
+/* Animation for table rows */
+.MuiTableRow-root:not(.MuiTableRow-head) {
+  transition: background-color 0.3s ease;
+}
+
+.MuiTableRow-root:not(.MuiTableRow-head):hover {
+  background-color: rgba(25, 118, 210, 0.04);
+}
+
+/* Icon button styling */
+.MuiIconButton-root {
+  transition: transform 0.2s ease, background-color 0.2s ease !important;
+}
+
+.MuiIconButton-root:hover {
+  transform: scale(1.1);
+}
+
+/* Chip styling */
+.MuiChip-root {
+  font-weight: 500 !important;
+}
+
+/* Form controls */
+.MuiFormControl-root {
+  margin-bottom: 8px !important;
+}
+
+.MuiInputLabel-root {
+  font-weight: 500 !important;
+}
+
+/* Switch */
+.MuiSwitch-colorPrimary.Mui-checked {
+  color: #1976d2 !important;
+}
+
+.MuiSwitch-track {
+  background-color: rgba(0, 0, 0, 0.23) !important;
+}
+
+/* Alert styling */
+.MuiAlert-standardSuccess {
+  background-color: #e6f7ee !important;
+  color: #2e7d32 !important;
+}
+
+.MuiAlert-standardError {
+  background-color: #fdeded !important;
+  color: #d32f2f !important;
+} 

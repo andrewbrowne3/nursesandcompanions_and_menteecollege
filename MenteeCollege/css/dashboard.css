@@ -1,0 +1,315 @@
+/* Dashboard Styles for MenteeCollege Analytics */
+
+/* Base Styles */
+:root {
+    --primary-color: #8460f6;
+    --secondary-color: #ff5722;
+    --success-color: #4caf50;
+    --danger-color: #f44336;
+    --warning-color: #ff9800;
+    --info-color: #2196f3;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --gray-300: #dee2e6;
+    --gray-400: #ced4da;
+    --gray-500: #adb5bd;
+    --gray-600: #6c757d;
+    --gray-700: #495057;
+    --gray-800: #343a40;
+    --gray-900: #212529;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Header */
+.dashboard-header {
+    background: linear-gradient(135deg, var(--primary-color), #6a3ff5);
+    color: white;
+    padding: 1.5rem 0;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-title {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.dashboard-subtitle {
+    font-weight: 400;
+    opacity: 0.9;
+    margin-bottom: 0;
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.dashboard-card h5 {
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: 1.25rem;
+    font-size: 1.1rem;
+}
+
+.dashboard-section {
+    margin-bottom: 2.5rem;
+}
+
+.dashboard-section h3 {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--gray-800);
+    border-left: 4px solid var(--primary-color);
+    padding-left: 1rem;
+}
+
+/* Metrics */
+.metric-card {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0.5rem 0;
+    color: var(--primary-color);
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.metric-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--gray-400);
+}
+
+/* Revenue Metrics */
+.revenue-value {
+    color: var(--success-color);
+}
+
+/* Chart Containers */
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+/* Loading and Errors */
+.loading-message, .error-message {
+    text-align: center;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin: 2rem 0;
+}
+
+.loading-message {
+    color: var(--gray-600);
+}
+
+.error-message {
+    color: var(--danger-color);
+}
+
+/* Custom Card Styles */
+.revenue-card {
+    border-left: 4px solid var(--success-color);
+}
+
+.applications-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+.conversion-card {
+    border-left: 4px solid var(--secondary-color);
+}
+
+.programs-card {
+    border-left: 4px solid var(--info-color);
+}
+
+/* Responsive Table */
+.kpi-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.kpi-table th {
+    background-color: var(--gray-100);
+    color: var(--gray-700);
+    font-weight: 600;
+    text-align: left;
+    padding: 0.75rem;
+    border-bottom: 2px solid var(--gray-300);
+}
+
+.kpi-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--gray-200);
+    color: var(--gray-700);
+}
+
+.kpi-table tr:hover {
+    background-color: var(--gray-100);
+}
+
+/* KPI Progress Bars */
+.kpi-progress-container {
+    background-color: var(--gray-200);
+    height: 8px;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.kpi-progress-bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s ease;
+}
+
+.progress-primary {
+    background-color: var(--primary-color);
+}
+
+.progress-success {
+    background-color: var(--success-color);
+}
+
+.progress-warning {
+    background-color: var(--warning-color);
+}
+
+.progress-danger {
+    background-color: var(--danger-color);
+}
+
+/* Footer */
+.dashboard-footer {
+    background-color: var(--gray-800);
+    color: var(--gray-300);
+    padding: 3rem 0;
+    margin-top: 3rem;
+}
+
+.footer-title {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.footer-link {
+    color: var(--gray-400);
+    display: block;
+    margin-bottom: 0.75rem;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-contact {
+    margin-bottom: 0.5rem;
+}
+
+.footer-social {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    color: var(--gray-500);
+    transition: color 0.3s ease;
+}
+
+.footer-social:hover {
+    color: white;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .metric-value {
+        font-size: 1.5rem;
+    }
+    
+    .chart-container {
+        height: 250px;
+    }
+    
+    .dashboard-card {
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .dashboard-title {
+        font-size: 1.75rem;
+    }
+    
+    .dashboard-section h3 {
+        font-size: 1.25rem;
+    }
+    
+    .metric-card {
+        padding: 1rem;
+    }
+    
+    .chart-container {
+        height: 200px;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dashboard-card {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.dashboard-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.dashboard-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.dashboard-card:nth-child(4) {
+    animation-delay: 0.3s;
+} 

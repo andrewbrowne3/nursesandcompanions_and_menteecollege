@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<br><br><br><br><br>
+
+<!---{% if page == 'register' %}
+<h1>Register user </h1>
+
+<p> Already have an account?  <a href="{% url 'login' %}">Login</a></p>
+</center>
+<br><br><br><br><br>
+{% else %} -->
+<div class="widget-wrap">
+<center>
+    <table>
+    <div class="form-group">
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username"/> <br>
+            <input type="password" name="password" placeholder="Enter Password"/><br>
+            <br>
+            <input type="submit" value="Login" class="btn btn-secondary"/>
+        </form>
+    </table>   
+    <!--<p> Don't have an account <a href="{ url 'register' }">sign up</a></p>-->
+</center>
+</div>
+</div>
+<br><br><br><br>
+<!--{% endif %}-->
+
+
+{% endblock %}
+

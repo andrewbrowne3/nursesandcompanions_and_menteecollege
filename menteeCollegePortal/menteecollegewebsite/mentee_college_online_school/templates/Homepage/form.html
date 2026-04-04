@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+<script src="https://www.paypal.com/sdk/js?client-id=Ab6iFt2jZuF40h72d6WrcCGgKv2oa-SouvkrqOc75sgmC6eVzU3UFmiJ-sgL-0Jops7_zARjNloW9Xfr&currency=USD&disable-funding=paylater"></script>
+
+
+<center>
+    <div class="card">
+        <h5 class="card-header text-white bg-primary">How to Apply</h5>
+        <div class="card-body">
+            <p class="card-text">Applying for our programs is a straightforward process. Just follow these simple steps:</p>
+            <ol>
+                <li>Select the degree type from the dropdown menu.</li>
+                <li>For the LPN program, choose the "Diploma" degree type.</li>
+                <li>Choose LPN in the "Diploma program" dropdown window</li>
+                <li>Fill out the form with your details.</li>
+                <li>Pay the application fee at the bottom of the application and your application is submitted!</li>
+            </ol>
+            <p class="card-text mt-3">If you have any other questions, please contact us at 770-931-5020.</p>
+        </div>
+    </div>
+    <br/>
+</center>
+
+<div class="widget-wrap">
+   
+<center>
+    <h1>Application  </h1>
+    <br/>
+    <label for="formSelector">Choose Application Type (for LPN choose diploma):</label>
+    <select id="formSelector">
+        <option value="certificate">Certificate</option>
+        <option value="associates">Associates</option>
+        <option value="diploma">Diploma</option>
+    </select>
+        <br/>
+        <form action="{% url 'application' %}" method="POST" id="certificateForm">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="certificate">
+            <table>
+                {{ form_certificate.as_table }}
+            </table>
+            <br/>
+            <h4>Application Fee: $35</h4>
+            <br/>
+            <p>
+                Kindly note, your application will be considered complete 
+                and ready for processing upon receipt of the application fee. 
+                This modest fee allows us to continue providing 
+                high-quality education and comprehensive application reviews. 
+                We appreciate your understanding and support.
+            </p>
+            <div class="paypal-button-container">
+            <div id="paypal-button-container-certificate"></div>
+            </div>
+            <br>
+            
+          
+            
+        </form>
+
+        <form action="{% url 'application' %}" method="POST" id="associatesForm" style="display: none;">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="associates">
+            <table>
+                {{ form_associates.as_table }}
+            </table>
+            <br/>
+            <h4>Application Fee: $75</h4>
+            <br/>
+            <p>
+                Kindly note, your application will be considered complete 
+                and ready for processing upon receipt of the application fee. 
+                This modest fee allows us to continue providing 
+                high-quality education and comprehensive application reviews. 
+                We appreciate your understanding and support.
+            </p>
+           <div class="paypal-button-container">
+                <div id="paypal-button-container-associates" ></div>
+            </div>
+            <br>
+          
+            
+        </form>
+
+        <form action="{% url 'application' %}" method="POST" id="diplomaForm" style="display: none;">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="diploma">
+            <table>
+                {{ form_diploma.as_table }}
+            </table>
+            <br/>
+            <h4>Application Fee: $75</h4>
+            <br/>
+            <p>
+                Kindly note, your application will be considered complete 
+                and ready for processing upon receipt of the application fee. 
+                This modest fee allows us to continue providing 
+                high-quality education and comprehensive application reviews. 
+                We appreciate your understanding and support.
+            </p>
+                <br/>
+            <div class="paypal-button-container">
+                <div id="paypal-button-container-diploma" class="paypal-button-container"></div>
+            </div>
+            <br>
+         
+            
+        </form>
+        <br>
+
+      
+        <script>
+            document.getElementById('formSelector').addEventListener('change', function() {
+                var selectedForm = this.value;
+            
+                document.getElementById('certificateForm').style.display = 'none';
+                document.getElementById('associatesForm').style.display = 'none';
+                document.getElementById('diplomaForm').style.display = 'none';
+            
+                document.getElementById(selectedForm + 'Form').style.display = 'block';
+            
+                const buttonContainerCertificate = document.getElementById('paypal-button-container-certificate');
+                const buttonContainerAssociates = document.getElementById('paypal-button-container-associates');
+                const buttonContainerDiploma = document.getElementById('paypal-button-container-diploma');
+            
+                buttonContainerCertificate.innerHTML = '';
+                buttonContainerAssociates.innerHTML = '';
+                buttonContainerDiploma.innerHTML = '';
+            
+                const checkForm = (formID) => {
+                    var form = document.getElementById(formID);
+                    if (!form.checkValidity()) {
+                        alert('Please fill out the form completely before making a payment.');
+                        return false;
+                    }
+                    return true;
+                }
+            
+                if (selectedForm === 'certificate') {
+                    paypal.Buttons({
+                        style: {
+                            layout: 'vertical',
+                            color: 'gold',
+                            shape: 'rect',
+                            label: 'paypal',
+                            height: 40
+                        },
+                        createOrder: function(data, actions) {
+                            if (!checkForm('certificateForm')) {
+                                return;
+                            }
+                            return actions.order.create({
+                                purchase_units: [{
+                                    amount: {
+                                        value: '0.01'
+                                    }
+                                }]
+                            });
+                        },
+                        onApprove: function(data, actions) {
+                            return actions.order.capture().then(function(details) {
+                                alert('Transaction completed by ' + details.payer.name.given_name);
+                                document.getElementById('certificateForm').submit();
+                            });
+                        }
+                    }).render(buttonContainerCertificate);
+                } else if (selectedForm === 'associates') {
+                    paypal.Buttons({
+                        style: {
+                            layout: 'vertical',
+                            color: 'gold',
+                            shape: 'rect',
+                            label: 'paypal',
+                            height: 40
+                        },
+                        createOrder: function(data, actions) {
+                            if (!checkForm('associatesForm')) {
+                                return;
+                            }
+                            return actions.order.create({
+                                purchase_units: [{
+                                    amount: {
+                                        value: '0.01'
+                                    }
+                                }]
+                            });
+                        },
+                        onApprove: function(data, actions) {
+                            return actions.order.capture().then(function(details) {
+                                alert('Transaction completed by ' + details.payer.name.given_name);
+                                document.getElementById('associatesForm').submit();
+                            });
+                        }
+                    }).render(buttonContainerAssociates);
+                } else if (selectedForm === 'diploma') {
+                    paypal.Buttons({
+                        style: {
+                            layout: 'vertical',
+                            color: 'gold',
+                            shape: 'rect',
+                            label: 'paypal',
+                            height: 40
+                        },
+                        createOrder: function(data, actions) {
+                            if (!checkForm('diplomaForm')) {
+                                return;
+                            }
+                            return actions.order.create({
+                                purchase_units: [{
+                                    amount: {
+                                        value: '0.01'
+                                    }
+                                }]
+                            });
+                        },
+                        onApprove: function(data, actions) {
+                            return actions.order.capture().then(function(details) {
+                                alert('Transaction completed by ' + details.payer.name.given_name);
+                                document.getElementById('diplomaForm').submit();
+                            });
+                        }
+                    }).render(buttonContainerDiploma);
+                }
+            });
+            
+            document.getElementById('formSelector').dispatchEvent(new Event('change'));
+            </script>
+            
+        
+        
+        
+        
+<br><br><br><br><br><br><br><br><br>
+</div>
+{% endblock %}

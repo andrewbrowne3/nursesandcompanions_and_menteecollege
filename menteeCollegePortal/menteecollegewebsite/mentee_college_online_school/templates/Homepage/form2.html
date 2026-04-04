@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<br>
+<div class="widget-wrap">
+<center>
+	<h1>Enrollment </h1>
+    <ul>
+    {% for student in  data %}
+    <li>{{student}}</li>
+    {% endfor %}
+    </ul>
+ <table>
+    <div class="form-group">
+<form action = "{% url 'createuser' %}" method="POST">
+    {% csrf_token %}
+
+
+    {{form.as_table}}
+    
+</table>
+<br>
+<input type="submit" value="   Enroll   "  class="btn btn-secondary">
+</form><br><br>
+
+</div>
+
+</center>
+<br><br><br><br><br><br><br><br><br>
+{% endblock %}
+</div>
