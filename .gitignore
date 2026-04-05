@@ -15,3 +15,6 @@ menteeCollegePortal/menteecollegeportalenv/
 menteeCollegePortal/env/
 menteeCollegePortal/dashboardenv/
 menteeCollegePortal/menteecollegewebsite/env/
+
+# Agent embeddings cache
+mentee_agent/chroma_db/

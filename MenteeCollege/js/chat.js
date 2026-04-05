@@ -1,54 +1,62 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const chatPopup = document.getElementById('chat-popup');  // Chat container
-    const openChatButton = document.getElementById('open-chat');  // Button to open chat
-    const closeChatButton = document.getElementById('close-chat');  // Button to close chat
-    const messagesContainer = document.getElementById('messages');  // Message display area
-    const messageInput = document.getElementById('message-input');  // Input field for user message
-    const sendMessageButton = document.getElementById('send-message');  // Button to send a message
+    const chatPopup = document.getElementById('chat-popup');
+    const openChatButton = document.getElementById('open-chat');
+    const closeChatButton = document.getElementById('close-chat');
+    const messagesContainer = document.getElementById('messages');
+    const messageInput = document.getElementById('message-input');
+    const sendMessageButton = document.getElementById('send-message');
 
-    let socket;  // WebSocket variable
-    const author = "Anonymous";  // Default author name (can be customized)
-    const sessionId = crypto.randomUUID();  // Generate a session ID
-    const startTime = new Date();  // Track the time when the page loads
+    let socket;
+    const author = "Anonymous";
+    const sessionId = crypto.randomUUID();
+    const startTime = new Date();
 
     // Automatically open chat popup after 5 seconds
     setTimeout(() => {
-        chatPopup.classList.add('visible');  // Show chat popup
-        openChatButton.style.display = 'none';  // Hide "open chat" button
-        setupWebSocket();  // Establish WebSocket connection
+        chatPopup.classList.add('visible');
+        openChatButton.style.display = 'none';
+        setupWebSocket();
     }, 5000);
 
     // Open chat manually
     openChatButton.addEventListener('click', () => {
-        chatPopup.classList.add('visible');  // Show chat
-        openChatButton.style.display = 'none';  // Hide open button
+        chatPopup.classList.add('visible');
+        openChatButton.style.display = 'none';
         if (!socket || socket.readyState !== WebSocket.OPEN) {
-            setupWebSocket();  // Establish WebSocket connection if not already open
+            setupWebSocket();
         }
     });
 
     // Close chat popup
     closeChatButton.addEventListener('click', () => {
-        chatPopup.classList.remove('visible');  // Hide chat popup
-        openChatButton.style.display = 'block';  // Show open button
-        if (socket) socket.close();  // Close WebSocket connection
+        chatPopup.classList.remove('visible');
+        openChatButton.style.display = 'block';
+        if (socket) socket.close();
     });
 
-    // Set up WebSocket connection
+    // Set up WebSocket connection to the FAQ agent
     function setupWebSocket() {
         console.log('Establishing WebSocket connection...');
-        socket = new WebSocket('wss://api.menteecollege.com/ws/chatroom/');
+        socket = new WebSocket('wss://api.menteecollege.com/ws/agent/');
 
-        // When WebSocket is successfully opened
         socket.onopen = () => {
             console.log('WebSocket connection established');
         };
 
-        // Handle incoming messages
         socket.onmessage = (event) => {
             const data = JSON.parse(event.data);
+
+            // Handle navigation if the agent wants to send the user to a page
+            if (data.navigate_to) {
+                addMessage(data.message, false, 'Mentee College');
+                setTimeout(() => {
+                    window.location.href = data.navigate_to;
+                }, 2000);
+                return;
+            }
+
             if (data.type === "bot_message" && data.options) {
-                addOptionButtons(data.message, data.options);  // Display options as buttons
+                addOptionButtons(data.message, data.options);
             } else {
                 addMessage(data.message, false, data.author || 'Mentee College');
             }
@@ -60,6 +68,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Send a message via WebSocket
     sendMessageButton.addEventListener('click', () => {
+        sendUserMessage();
+    });
+
+    // Send on Enter key (Shift+Enter for new line)
+    messageInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendUserMessage();
+        }
+    });
+
+    function sendUserMessage() {
         const message = messageInput.value.trim();
         if (message === '') return;
         if (socket && socket.readyState === WebSocket.OPEN) {
@@ -69,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             console.error('WebSocket is not connected');
         }
-    });
+    }
 
     // Add a message to the chat display
     function addMessage(text, sent, author) {
@@ -123,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Track time spent on the page
     function trackTimeSpent() {
         const endTime = new Date();
-        const timeSpent = Math.round((endTime - startTime) / 1000);  // Time spent in seconds
+        const timeSpent = Math.round((endTime - startTime) / 1000);
         const pageData = {
             session_id: sessionId,
             page_url: window.location.href,
@@ -133,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         console.log('Prepared page data:', pageData);
 
-        // Use sendBeacon if available, fallback to fetch
         if (navigator.sendBeacon) {
             const blob = new Blob([JSON.stringify(pageData)], { type: 'application/json' });
             const success = navigator.sendBeacon('https://api.menteecollege.com/api/track-page/', blob);
@@ -150,5 +169,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    window.addEventListener('beforeunload', trackTimeSpent);  // Track time spent when the page unloads
+    window.addEventListener('beforeunload', trackTimeSpent);
 });

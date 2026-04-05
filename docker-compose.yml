@@ -43,6 +43,20 @@ services:
     networks:
       - internal
 
+  # ---------- FAQ Agent (FastAPI) ----------
+  faq-agent:
+    build:
+      context: .
+      dockerfile: mentee_agent/Dockerfile
+    ports:
+      - "127.0.0.1:5010:5010"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - MENTEE_AGENT_PORT=5010
+    restart: unless-stopped
+    networks:
+      - internal
+
   # ---------- Redis ----------
   redis:
     image: redis:7-alpine

@@ -1,6 +1,7 @@
 fastapi
-uvicorn
+uvicorn[standard]
 openai
 chromadb
 beautifulsoup4
 pydantic
+websockets
