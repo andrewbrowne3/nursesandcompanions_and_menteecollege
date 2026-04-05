@@ -42,8 +42,10 @@ $(document).ready(function() {
     //------- Datepicker  js --------//  
 
       $( function() {
-        $( "#datepicker" ).datepicker();
-        $( "#datepicker2" ).datepicker();
+        if ($.fn.datepicker) {
+          $( "#datepicker" ).datepicker();
+          $( "#datepicker2" ).datepicker();
+        }
       } );
 
 

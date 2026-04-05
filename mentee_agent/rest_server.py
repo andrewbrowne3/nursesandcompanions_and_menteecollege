@@ -3,6 +3,7 @@ import logging
 from typing import Optional
 
 from fastapi import FastAPI, Query, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from .agent import ConversationSession, start_conversation, handle_message
@@ -26,6 +27,14 @@ def create_app(faq_collection, programs, request_api_key=None,
                openai_api_key=None, model="gpt-4o-mini-2024-07-18"):
     app = FastAPI(title="Mentee College FAQ Agent")
 
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
     # ─── WebSocket endpoint ───
 
     @app.websocket("/ws/chat/")
@@ -33,17 +42,24 @@ def create_app(faq_collection, programs, request_api_key=None,
         await ws.accept()
         logger.info("WebSocket connection established")
 
-        # Start conversation and send greeting
-        response, session = start_conversation()
-        await ws.send_json({
-            "type": "bot_message",
-            "message": response["message"],
-            "options": response.get("options"),
-        })
-
         try:
+            # Start conversation and send greeting
+            response, session = start_conversation()
+            greeting = {
+                "type": "bot_message",
+                "message": response["message"],
+            }
+            if response.get("options"):
+                greeting["options"] = response["options"]
+            logger.info(f"Sending greeting: {greeting['message'][:50]}...")
+            await ws.send_text(json.dumps(greeting))
+            logger.info("Greeting sent successfully")
+
             while True:
+                logger.info("Waiting for message...")
                 data = await ws.receive_text()
+                logger.info(f"Received: {data[:100]}")
+
                 try:
                     parsed = json.loads(data)
                     user_message = parsed.get("message", "").strip()
@@ -71,12 +87,13 @@ def create_app(faq_collection, programs, request_api_key=None,
                 if result.get("navigate_to"):
                     reply["navigate_to"] = result["navigate_to"]
 
-                await ws.send_json(reply)
+                await ws.send_text(json.dumps(reply))
+                logger.info(f"Sent reply: {result['message'][:50]}...")
 
         except WebSocketDisconnect:
-            logger.info(f"WebSocket disconnected (session {session.session_id})")
+            logger.info(f"WebSocket disconnected (session {getattr(session, 'session_id', 'unknown')})")
         except Exception as e:
-            logger.error(f"WebSocket error: {e}")
+            logger.error(f"WebSocket error: {e}", exc_info=True)
             try:
                 await ws.close()
             except Exception:
