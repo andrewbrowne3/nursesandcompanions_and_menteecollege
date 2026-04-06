@@ -37,12 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set up WebSocket connection to the FAQ agent
     function setupWebSocket() {
         console.log('Establishing WebSocket connection...');
-        // Use same domain with appropriate protocol
+        // Connect through nginx (same host, /ws/chat/ route)
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-        const host = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-            ? 'localhost:5010'
-            : window.location.host;
-        socket = new WebSocket(protocol + '//' + host + '/ws/chat/');
+        socket = new WebSocket(protocol + '//' + window.location.host + '/ws/chat/');
 
         socket.onopen = () => {
             console.log('WebSocket connection established');
