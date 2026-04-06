@@ -190,7 +190,7 @@ def _handle_greeting(session, user_message):
         session.phase = "name"
         reply = (
             "That is great to hear! We have programs that can get you certified "
-            "and working in as little as 4 hours for CPR or as short as 3 weeks for CNA. "
+            "and working in as little as 1 day for CPR or as short as 3 weeks for CNA. "
             "What is your name?"
         )
         return _make_response(session, reply)
