@@ -4,9 +4,7 @@ services:
     build:
       context: ./menteeCollegePortal/menteecollegewebsite
       dockerfile: Dockerfile
-    command: gunicorn menteecollegewebsite.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120
-    ports:
-      - "127.0.0.1:8010:8000"
+    command: gunicorn menteecollegewebsite.wsgi:application --bind 0.0.0.0:8010 --workers 3 --timeout 120
     volumes:
       - sqlite-data:/data/db
       - ./menteeCollegePortal/menteecollegewebsite/staticfiles:/app/staticfiles
@@ -14,21 +12,18 @@ services:
     env_file:
       - ./menteeCollegePortal/menteecollegewebsite/menteecollegewebsite/.env
     environment:
-      - REDIS_HOST=redis
+      - REDIS_HOST=127.0.0.1
     depends_on:
       - redis
     restart: unless-stopped
-    networks:
-      - internal
+    network_mode: host
 
   # ---------- Django WebSocket (Daphne) ----------
   backend-ws:
     build:
       context: ./menteeCollegePortal/menteecollegewebsite
       dockerfile: Dockerfile
-    command: daphne -b 0.0.0.0 -p 8002 menteecollegewebsite.asgi:application
-    ports:
-      - "127.0.0.1:8012:8002"
+    command: daphne -b 0.0.0.0 -p 8012 menteecollegewebsite.asgi:application
     volumes:
       - sqlite-data:/data/db
       - ./menteeCollegePortal/menteecollegewebsite/staticfiles:/app/staticfiles
@@ -36,26 +31,22 @@ services:
     env_file:
       - ./menteeCollegePortal/menteecollegewebsite/menteecollegewebsite/.env
     environment:
-      - REDIS_HOST=redis
+      - REDIS_HOST=127.0.0.1
     depends_on:
       - redis
     restart: unless-stopped
-    networks:
-      - internal
+    network_mode: host
 
   # ---------- FAQ Agent (FastAPI) ----------
   faq-agent:
     build:
       context: .
       dockerfile: mentee_agent/Dockerfile
-    ports:
-      - "127.0.0.1:5010:5010"
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - MENTEE_AGENT_PORT=5010
     restart: unless-stopped
-    networks:
-      - internal
+    network_mode: host
 
   # ---------- Redis ----------
   redis:
@@ -63,13 +54,8 @@ services:
     volumes:
       - redis-data:/data
     restart: unless-stopped
-    networks:
-      - internal
+    network_mode: host
 
 volumes:
   sqlite-data:
   redis-data:
-
-networks:
-  internal:
-    driver: bridge
