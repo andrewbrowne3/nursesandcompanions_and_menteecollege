@@ -51,16 +51,18 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('WebSocket connection established');
             // Send current page context as first message
             socket.send(JSON.stringify({ page: currentPage }));
+            // Show typing indicator for incoming greeting
+            showTypingIndicator();
         };
 
         socket.onmessage = (event) => {
             const data = JSON.parse(event.data);
 
-            // Remove typing indicator if present
-            removeTypingIndicator();
-
-            // Small delay before showing message for natural feel
+            // Show typing dots for at least 3 seconds before revealing message
+            showTypingIndicator();
             setTimeout(() => {
+                removeTypingIndicator();
+
                 if (data.navigate_to) {
                     addMessage(data.message, false, 'Mentee College');
                     setTimeout(() => {
@@ -74,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     addMessage(data.message, false, data.author || 'Mentee College');
                 }
-            }, 500);
+            }, 3000);
         };
 
         socket.onerror = (error) => console.error('WebSocket error:', error);
