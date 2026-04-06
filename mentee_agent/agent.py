@@ -30,7 +30,23 @@ class ConversationSession(BaseModel):
     lead: LeadInfo = Field(default_factory=LeadInfo)
     message_history: list[dict] = Field(default_factory=list)
     navigate_to: Optional[str] = None
+    page: str = "/"
+    skip_count: int = 0
 
+
+# Page to program mapping for FAQ pages
+PAGE_PROGRAM_MAP = {
+    "/CNA_FAQ.html": "Nurse Aide (CNA)",
+    "/CPR_FAQ.html": "CPR & BLS Certification",
+    "/EKG_FAQ.html": "EKG Technician",
+    "/Phlebotomy_FAQ.html": "Phlebotomy",
+    "/PCT_FAQ.html": "Patient Care Technician",
+    "/MedicationAide_FAQ.html": "Medication Aide",
+    "/MA(certificate)_FAQ.html": "Medical Assistant Certificate",
+    "/MA(associate)_FAQ.html": "Medical Assistant Associates",
+    "/PN_FAQ.html": "Practical Nursing",
+    "/SonographyFAQ.html": "Sonography",
+}
 
 PROGRAM_OPTIONS = [
     "Practical Nursing",
@@ -45,18 +61,41 @@ PROGRAM_OPTIONS = [
 ]
 
 
-def start_conversation():
-    """Create a new conversation session and return the greeting."""
-    session = ConversationSession()
-    message = (
-        "Hey there! Welcome to Mentee College. We help people just like you "
-        "start rewarding careers in healthcare. Are you interested in learning "
-        "more about our programs?"
-    )
+def start_conversation(page="/"):
+    """Create a new conversation session with page-aware greeting."""
+    session = ConversationSession(page=page)
+
+    if page == "/Application.html":
+        message = (
+            "Hey there! I see you are on the application page, that is awesome! "
+            "I can help you through the whole process. Before we get started, "
+            "can I get your name so our admissions team can follow up with you?"
+        )
+        session.phase = "name"
+    elif page in PAGE_PROGRAM_MAP:
+        program = PAGE_PROGRAM_MAP[page]
+        message = (
+            f"Hey there! I see you are checking out our {program} program, great choice! "
+            f"I can tell you everything about it. Before I do, can I grab your name "
+            f"real quick so we do not lose touch?"
+        )
+        session.phase = "name"
+    else:
+        message = (
+            "Hey there! Welcome to Mentee College. We help people just like you "
+            "start rewarding careers in healthcare. Are you interested in learning "
+            "more about our programs?"
+        )
+
     session.message_history.append({"role": "assistant", "content": message})
+
+    options = None
+    if session.phase == "greeting":
+        options = ["Yes", "No"]
+
     return {
         "message": message,
-        "options": ["Yes", "No"],
+        "options": options,
         "phase": session.phase,
         "lead": session.lead.model_dump(),
         "navigate_to": None,
@@ -65,23 +104,84 @@ def start_conversation():
 
 
 def handle_message(session, user_message, faq_collection, programs, api_key,
-                   model="gpt-4o-mini-2024-07-18"):
+                   model="gpt-4o-mini-2024-07-18", page=None):
     """Process a user message based on the current conversation phase."""
+    if page:
+        session.page = page
     session.message_history.append({"role": "user", "content": user_message})
     session.navigate_to = None
 
     if session.phase == "greeting":
         return _handle_greeting(session, user_message)
     elif session.phase == "name":
-        return _handle_name(session, user_message)
+        return _handle_name(session, user_message, faq_collection, programs, api_key, model)
     elif session.phase == "program":
-        return _handle_program(session, user_message)
+        return _handle_program(session, user_message, faq_collection, programs, api_key, model)
     elif session.phase == "phone":
-        return _handle_phone(session, user_message)
+        return _handle_phone(session, user_message, faq_collection, programs, api_key, model)
     elif session.phase == "faq":
         return _handle_faq(session, user_message, faq_collection, programs, api_key, model)
 
     return _make_response(session, "Something went wrong. Call us at (770) 931-5020 and we will help you out.")
+
+
+def _looks_like_answer(user_message, phase):
+    """Check if the user's message looks like it answers the current question."""
+    msg = user_message.strip().lower()
+    if phase == "name":
+        # Names are usually 1-3 words, no question marks
+        return "?" not in msg and len(msg.split()) <= 4 and len(msg) < 40 and not any(
+            kw in msg for kw in ["how", "what", "cost", "price", "program", "much", "long", "require"]
+        )
+    elif phase == "phone":
+        # Phone numbers have digits
+        digits = sum(1 for c in msg if c.isdigit())
+        return digits >= 7
+    elif phase == "program":
+        # Check if it matches or partially matches a program option
+        for opt in PROGRAM_OPTIONS:
+            if msg in opt.lower() or opt.lower() in msg:
+                return True
+        return False
+    return True
+
+
+def _handle_skip(session, user_message, faq_collection, programs, api_key, model, current_ask):
+    """Handle when the user skips a guided question — use LLM to respond naturally."""
+    session.skip_count += 1
+
+    if session.skip_count >= 2:
+        # Stop pushing, switch to FAQ mode
+        session.phase = "faq"
+        return _handle_faq(session, user_message, faq_collection, programs, api_key, model)
+
+    # Use LLM to acknowledge their question and steer back
+    client = OpenAI(api_key=api_key)
+    steer_prompt = (
+        "You are a friendly admissions rep for Mentee College. The student just said something "
+        "instead of answering your question. Acknowledge what they said briefly, then naturally "
+        "steer back to getting their info. Keep it to 2-3 sentences max. No emojis, no markdown, "
+        "no bullet points. Sound like a real person.\n\n"
+        f"You asked: {current_ask}\n"
+        f"They said: {user_message}\n\n"
+        "Explain that you want their info so you can make sure they do not miss out and so "
+        "the admissions team can follow up in case the chat disconnects. Then re-ask the question."
+    )
+    try:
+        completion = client.chat.completions.create(
+            model=model,
+            messages=[{"role": "user", "content": steer_prompt}],
+            temperature=0.7,
+            max_tokens=200,
+        )
+        reply = completion.choices[0].message.content
+    except Exception:
+        reply = (
+            f"Great question! I will definitely help you with that. But first, so we do not "
+            f"lose touch in case this chat ends, {current_ask.lower()}"
+        )
+
+    return _make_response(session, reply)
 
 
 def _handle_greeting(session, user_message):
@@ -104,20 +204,43 @@ def _handle_greeting(session, user_message):
         return _make_response(session, reply)
 
 
-def _handle_name(session, user_message):
+def _handle_name(session, user_message, faq_collection, programs, api_key, model):
+    if not _looks_like_answer(user_message, "name"):
+        return _handle_skip(
+            session, user_message, faq_collection, programs, api_key, model,
+            "What is your name?"
+        )
+
     name = user_message.strip()
     if not name:
         return _make_response(session, "I did not catch that. What is your name?")
 
     session.lead.name = name
     session.phase = "program"
-    reply = (
-        f"Nice to meet you, {name}! Which program are you most interested in?"
-    )
+
+    # If we already know the program from the page, skip asking
+    if session.page in PAGE_PROGRAM_MAP:
+        program = PAGE_PROGRAM_MAP[session.page]
+        session.lead.program_interest = program
+        session.phase = "phone"
+        reply = (
+            f"Nice to meet you, {name}! Since you are already looking at {program}, "
+            f"I am guessing that is the one you are interested in. "
+            f"What is the best phone number for our admissions team to reach you at?"
+        )
+        return _make_response(session, reply)
+
+    reply = f"Nice to meet you, {name}! Which program are you most interested in?"
     return _make_response(session, reply, options=PROGRAM_OPTIONS)
 
 
-def _handle_program(session, user_message):
+def _handle_program(session, user_message, faq_collection, programs, api_key, model):
+    if not _looks_like_answer(user_message, "program"):
+        return _handle_skip(
+            session, user_message, faq_collection, programs, api_key, model,
+            "Which program are you most interested in?"
+        )
+
     program = user_message.strip()
     if not program:
         return _make_response(session, "Which program caught your eye?", options=PROGRAM_OPTIONS)
@@ -132,7 +255,13 @@ def _handle_program(session, user_message):
     return _make_response(session, reply)
 
 
-def _handle_phone(session, user_message):
+def _handle_phone(session, user_message, faq_collection, programs, api_key, model):
+    if not _looks_like_answer(user_message, "phone"):
+        return _handle_skip(
+            session, user_message, faq_collection, programs, api_key, model,
+            "What is the best phone number for our admissions team to reach you at?"
+        )
+
     phone = user_message.strip()
     if not phone:
         return _make_response(session, "What is a good phone number for us to reach you?")
@@ -141,12 +270,21 @@ def _handle_phone(session, user_message):
     session.phase = "faq"
     name = session.lead.name or "there"
     program = session.lead.program_interest or "our programs"
-    reply = (
-        f"{name}, I have got you down for {program} and our admissions team will be "
-        f"reaching out to you soon at {phone}. In the meantime, is there anything "
-        f"you want to know about {program} or any of our other programs? I know "
-        f"everything about pricing, requirements, schedules, you name it. Ask me anything!"
-    )
+
+    if session.page == "/Application.html":
+        reply = (
+            f"Perfect, {name}! I have got your info and our team will follow up with you. "
+            f"Now let me help you with this application. The form on this page lets you "
+            f"apply for {program}. Just fill in your personal details, and if you have "
+            f"any questions about any of the fields, ask me and I will walk you through it!"
+        )
+    else:
+        reply = (
+            f"{name}, I have got you down for {program} and our admissions team will be "
+            f"reaching out to you soon at {phone}. In the meantime, is there anything "
+            f"you want to know about {program} or any of our other programs? I know "
+            f"everything about pricing, requirements, schedules, you name it. Ask me anything!"
+        )
     return _make_response(session, reply)
 
 
@@ -155,7 +293,6 @@ def _handle_faq(session, user_message, faq_collection, programs, api_key, model)
     session.lead.questions_asked.append(user_message)
 
     state = AgentState(question=user_message)
-    # Copy lead info into agent state
     state.lead = session.lead.model_copy()
 
     result = run_agent(
@@ -165,9 +302,9 @@ def _handle_faq(session, user_message, faq_collection, programs, api_key, model)
         api_key=api_key,
         model=model,
         conversation_history=session.message_history,
+        page=session.page,
     )
 
-    # Sync any new info the agent collected back to the session
     session.lead = state.lead
     if state.navigate_to:
         session.navigate_to = state.navigate_to
@@ -223,11 +360,32 @@ def parse_response(raw):
     return thought, action, action_input, True
 
 
-def build_messages(state, program_list, conversation_history=None):
+def build_messages(state, program_list, conversation_history=None, page="/"):
     """Construct the OpenAI messages list for the current state."""
     system_prompt = build_system_prompt(program_list)
 
-    # Add lead context to system prompt so the agent knows who it is talking to
+    # Add page context
+    if page == "/Application.html":
+        system_prompt += (
+            "\n\n## Page Context\n"
+            "The student is currently on the Application page. Help them fill out the form. "
+            "The form has fields for: program type (Certificate/Associates/Diploma/CPR), "
+            "name, address, phone, email, date of birth, gender, education level, "
+            "schedule preference (Day/Evening/Weekend), and references. "
+            "Certificate programs (CNA, MA) have a $35 application fee. "
+            "Associates and Diploma programs have a $75 application fee. "
+            "Guide them through each section if they ask for help."
+        )
+    elif page in PAGE_PROGRAM_MAP:
+        program = PAGE_PROGRAM_MAP[page]
+        system_prompt += (
+            f"\n\n## Page Context\n"
+            f"The student is currently viewing the {program} FAQ page. "
+            f"They are likely interested in this program. Proactively offer relevant info "
+            f"and always push them to apply."
+        )
+
+    # Add lead context
     lead = state.lead
     if lead.name or lead.program_interest:
         system_prompt += "\n\n## Current Student Info\n"
@@ -240,12 +398,10 @@ def build_messages(state, program_list, conversation_history=None):
 
     messages = [{"role": "system", "content": system_prompt}]
 
-    # Include conversation history so the agent has context
     if conversation_history:
-        for msg in conversation_history[:-1]:  # exclude the latest user message, we add it below
+        for msg in conversation_history[:-1]:
             messages.append({"role": msg["role"], "content": msg["content"]})
 
-    # Build user content with any previously loaded context
     context_parts = []
     if state.context:
         context_parts.append("Previously retrieved information:")
@@ -261,7 +417,6 @@ def build_messages(state, program_list, conversation_history=None):
 
     messages.append({"role": "user", "content": user_content})
 
-    # Add previous agent reasoning steps
     for step in state.steps:
         assistant_text = (
             f"Thought: {step['thought']}\n"
@@ -287,7 +442,7 @@ def _call_llm(client, messages, model, max_tokens=1920):
 
 def run_agent(state, faq_collection, programs, api_key,
               model="gpt-4o-mini-2024-07-18", max_steps=6,
-              conversation_history=None):
+              conversation_history=None, page="/"):
     """Run the ReAct agent loop until FINISH or max_steps is reached."""
     client = OpenAI(api_key=api_key)
 
@@ -296,7 +451,7 @@ def run_agent(state, faq_collection, programs, api_key,
     )
 
     for step_num in range(max_steps):
-        messages = build_messages(state, program_list, conversation_history)
+        messages = build_messages(state, program_list, conversation_history, page)
 
         logger.info(f"Agent step {step_num + 1}")
         try:

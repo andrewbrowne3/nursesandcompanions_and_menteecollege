@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="css/owl.carousel.css" />
     <link rel="stylesheet" href="css/jquery-ui.css" />
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/chat.css" />
     <link rel="stylesheet" href="css/paypal.css" />
 
     <!-- Google tag (gtag.js) -->
@@ -2889,5 +2890,22 @@
   }
 }
 </script>
+<!-- Chat Pop-Up Window -->
+<div id="chat-popup" class="chat-container hidden">
+<div class="chat-header">
+<h2>Chat with Us</h2>
+<button id="close-chat" class="close-btn">X</button>
+</div>
+<div class="messages" id="messages"></div>
+<div class="message-input">
+<textarea id="message-input" placeholder="Type your message"></textarea>
+<button id="send-message">Send</button>
+</div>
+</div>
+
+<!-- Button to Open Chat -->
+<button id="open-chat" class="open-chat-btn">Chat with Us!</button>
+
+<script src="js/chat.js"></script>
 </body>
 </html>

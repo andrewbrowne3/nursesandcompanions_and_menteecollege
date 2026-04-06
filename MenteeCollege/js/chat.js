@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const author = "Anonymous";
     const sessionId = crypto.randomUUID();
     const startTime = new Date();
+    const currentPage = window.location.pathname;
 
     // Automatically open chat popup after 5 seconds
     setTimeout(() => {
@@ -37,31 +38,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set up WebSocket connection to the FAQ agent
     function setupWebSocket() {
         console.log('Establishing WebSocket connection...');
-        // Connect through nginx (same host, /ws/chat/ route)
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
         socket = new WebSocket(protocol + '//' + window.location.host + '/ws/chat/');
 
         socket.onopen = () => {
             console.log('WebSocket connection established');
+            // Send current page context as first message
+            socket.send(JSON.stringify({ page: currentPage }));
         };
 
         socket.onmessage = (event) => {
             const data = JSON.parse(event.data);
 
-            // Handle navigation if the agent wants to send the user to a page
-            if (data.navigate_to) {
-                addMessage(data.message, false, 'Mentee College');
-                setTimeout(() => {
-                    window.location.href = data.navigate_to;
-                }, 2000);
-                return;
-            }
+            // Remove typing indicator if present
+            removeTypingIndicator();
 
-            if (data.type === "bot_message" && data.options) {
-                addOptionButtons(data.message, data.options);
-            } else {
-                addMessage(data.message, false, data.author || 'Mentee College');
-            }
+            // Small delay before showing message for natural feel
+            setTimeout(() => {
+                if (data.navigate_to) {
+                    addMessage(data.message, false, 'Mentee College');
+                    setTimeout(() => {
+                        window.location.href = data.navigate_to;
+                    }, 2000);
+                    return;
+                }
+
+                if (data.type === "bot_message" && data.options) {
+                    addOptionButtons(data.message, data.options);
+                } else {
+                    addMessage(data.message, false, data.author || 'Mentee College');
+                }
+            }, 500);
         };
 
         socket.onerror = (error) => console.error('WebSocket error:', error);
@@ -85,23 +92,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const message = messageInput.value.trim();
         if (message === '') return;
         if (socket && socket.readyState === WebSocket.OPEN) {
-            socket.send(JSON.stringify({ message, author }));
+            socket.send(JSON.stringify({ message, author, page: currentPage }));
             addMessage(message, true, 'You');
             messageInput.value = '';
+            showTypingIndicator();
         } else {
             console.error('WebSocket is not connected');
         }
+    }
+
+    // Typing indicator
+    function showTypingIndicator() {
+        const existing = document.getElementById('typing-indicator');
+        if (existing) return;
+
+        const typingDiv = document.createElement('div');
+        typingDiv.id = 'typing-indicator';
+        typingDiv.classList.add('message', 'received');
+        typingDiv.innerHTML = '<div class="message-bubble typing-bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
+        messagesContainer.appendChild(typingDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+        const typing = document.getElementById('typing-indicator');
+        if (typing) typing.remove();
     }
 
     // Add a message to the chat display
     function addMessage(text, sent, author) {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', sent ? 'sent' : 'received');
-        messageDiv.innerHTML = `
-            <div class="message-bubble">
-                <strong>${author}:</strong> ${text}
-            </div>
-        `;
+        messageDiv.innerHTML = '<div class="message-bubble"><strong>' + author + ':</strong> ' + text + '</div>';
         messagesContainer.appendChild(messageDiv);
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
@@ -131,10 +153,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             button.addEventListener('click', () => {
                 if (socket && socket.readyState === WebSocket.OPEN) {
-                    socket.send(JSON.stringify({ message: option, author }));
+                    socket.send(JSON.stringify({ message: option, author, page: currentPage }));
                 }
                 addMessage(option, true, 'You');
                 optionsContainer.remove();
+                showTypingIndicator();
             });
             optionsContainer.appendChild(button);
         });
@@ -149,25 +172,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const pageData = {
             session_id: sessionId,
             page_url: window.location.href,
-            page_path: window.location.pathname,
+            page_path: currentPage,
             timestamp: startTime.toISOString(),
             time_spent: timeSpent,
         };
-        console.log('Prepared page data:', pageData);
 
         if (navigator.sendBeacon) {
             const blob = new Blob([JSON.stringify(pageData)], { type: 'application/json' });
-            const success = navigator.sendBeacon('https://api.menteecollege.com/api/track-page/', blob);
-            console.log('SendBeacon success:', success);
-        } else {
-            fetch('https://api.menteecollege.com/api/track-page/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(pageData),
-                keepalive: true,
-            })
-            .then(response => console.log('Fetch fallback success:', response))
-            .catch(error => console.error('Fetch fallback error:', error));
+            navigator.sendBeacon('https://api.menteecollege.com/api/track-page/', blob);
         }
     }
 

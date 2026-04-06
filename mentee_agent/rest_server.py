@@ -43,15 +43,26 @@ def create_app(faq_collection, programs, request_api_key=None,
         logger.info("WebSocket connection established")
 
         try:
-            # Start conversation and send greeting
-            response, session = start_conversation()
+            # Wait for the first message to get the page context
+            logger.info("Waiting for page context...")
+            first_data = await ws.receive_text()
+            logger.info(f"First message: {first_data[:100]}")
+            page = "/"
+            try:
+                first_parsed = json.loads(first_data)
+                page = first_parsed.get("page", "/")
+            except (json.JSONDecodeError, AttributeError):
+                pass
+
+            # Start conversation with page awareness
+            response, session = start_conversation(page=page)
             greeting = {
                 "type": "bot_message",
                 "message": response["message"],
             }
             if response.get("options"):
                 greeting["options"] = response["options"]
-            logger.info(f"Sending greeting: {greeting['message'][:50]}...")
+            logger.info(f"Sending greeting for page {page}: {greeting['message'][:50]}...")
             await ws.send_text(json.dumps(greeting))
             logger.info("Greeting sent successfully")
 
@@ -63,8 +74,10 @@ def create_app(faq_collection, programs, request_api_key=None,
                 try:
                     parsed = json.loads(data)
                     user_message = parsed.get("message", "").strip()
+                    msg_page = parsed.get("page", None)
                 except (json.JSONDecodeError, AttributeError):
                     user_message = data.strip()
+                    msg_page = None
 
                 if not user_message:
                     continue
@@ -76,6 +89,7 @@ def create_app(faq_collection, programs, request_api_key=None,
                     programs=programs,
                     api_key=openai_api_key,
                     model=model,
+                    page=msg_page,
                 )
 
                 reply = {
