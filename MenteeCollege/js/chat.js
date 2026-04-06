@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Automatically open chat popup after 5 seconds
-    setTimeout(openChat, 5000);
+    setTimeout(openChat, 2000);
 
     // Open chat manually
     openChatButton.addEventListener('click', () => {
