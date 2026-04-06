@@ -7,32 +7,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendMessageButton = document.getElementById('send-message');
 
     let socket;
+    let chatOpened = false;
     const author = "Anonymous";
     const sessionId = crypto.randomUUID();
     const startTime = new Date();
     const currentPage = window.location.pathname;
 
-    // Automatically open chat popup after 5 seconds
-    setTimeout(() => {
+    function openChat() {
+        if (chatOpened) return;
+        chatOpened = true;
         chatPopup.classList.add('visible');
         openChatButton.style.display = 'none';
         setupWebSocket();
-    }, 5000);
+    }
+
+    // Automatically open chat popup after 5 seconds
+    setTimeout(openChat, 5000);
 
     // Open chat manually
     openChatButton.addEventListener('click', () => {
-        chatPopup.classList.add('visible');
-        openChatButton.style.display = 'none';
-        if (!socket || socket.readyState !== WebSocket.OPEN) {
-            setupWebSocket();
+        if (!chatOpened) {
+            openChat();
+        } else {
+            // Reopen — just show existing conversation
+            chatPopup.classList.add('visible');
+            openChatButton.style.display = 'none';
         }
     });
 
-    // Close chat popup
+    // Close chat popup (just hide it, keep connection alive)
     closeChatButton.addEventListener('click', () => {
         chatPopup.classList.remove('visible');
         openChatButton.style.display = 'block';
-        if (socket) socket.close();
     });
 
     // Set up WebSocket connection to the FAQ agent
