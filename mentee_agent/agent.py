@@ -186,7 +186,26 @@ def _handle_skip(session, user_message, faq_collection, programs, api_key, model
 
 def _handle_greeting(session, user_message):
     msg = user_message.strip().lower()
-    if msg in ("yes", "yeah", "sure", "okay", "ok", "yep", "yea", "y"):
+
+    # Explicit yes
+    YES_WORDS = {"yes", "yeah", "sure", "okay", "ok", "yep", "yea", "y",
+                 "yes please", "yh", "yess", "absolutely", "definitely",
+                 "of course", "interested", "i am", "i'm interested", "tell me more"}
+
+    # Program keywords — user is expressing direct interest
+    PROGRAM_KEYWORDS = {"cna", "lpn", "ekg", "nursing", "nurse", "phlebotomy",
+                        "medical assistant", "pct", "cpr", "sonography",
+                        "medication aide", "practical nursing", "nurse aide",
+                        "certificate", "diploma", "program", "classes", "course"}
+
+    # Interest phrases
+    INTEREST_PHRASES = {"how much", "cost", "price", "tuition", "enroll",
+                        "apply", "register", "sign up", "start", "when",
+                        "schedule", "hours", "accredited", "requirements",
+                        "i want", "i need", "looking for", "help", "info",
+                        "information", "learn about", "tell me"}
+
+    if msg in YES_WORDS or any(w in msg for w in YES_WORDS):
         session.phase = "name"
         reply = (
             "That is great to hear! We have programs that can get you certified "
@@ -194,7 +213,19 @@ def _handle_greeting(session, user_message):
             "What is your name?"
         )
         return _make_response(session, reply)
-    else:
+
+    if any(kw in msg for kw in PROGRAM_KEYWORDS) or any(p in msg for p in INTEREST_PHRASES):
+        session.phase = "name"
+        reply = (
+            "That is great to hear! We have programs that can get you certified "
+            "and working in as little as 1 day for CPR or as short as 3 weeks for CNA. "
+            "What is your name?"
+        )
+        return _make_response(session, reply)
+
+    # Explicit no
+    NO_WORDS = {"no", "nah", "nope", "not interested", "no thanks", "n"}
+    if msg in NO_WORDS:
         reply = (
             "No worries at all! If you ever change your mind we are right here "
             "for you. You can always reach us at (770) 931-5020 or stop by our "
@@ -202,6 +233,15 @@ def _handle_greeting(session, user_message):
             "We would love to help you start your healthcare career whenever you are ready."
         )
         return _make_response(session, reply)
+
+    # Anything else — assume interest, don't dismiss
+    session.phase = "name"
+    reply = (
+        "That is great to hear! We have programs that can get you certified "
+        "and working in as little as 1 day for CPR or as short as 3 weeks for CNA. "
+        "What is your name?"
+    )
+    return _make_response(session, reply)
 
 
 def _handle_name(session, user_message, faq_collection, programs, api_key, model):

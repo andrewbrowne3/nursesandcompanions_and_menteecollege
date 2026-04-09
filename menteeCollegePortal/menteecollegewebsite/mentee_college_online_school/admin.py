@@ -51,7 +51,24 @@ class EventAttachmentAdmin(admin.ModelAdmin):
     search_fields = ('title', 'event__title')
     date_hierarchy = 'uploaded_at'
 
+class LeadAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'phone_number', 'program_interest', 'status', 'reached_out', 'source', 'created_at', 'last_contacted_at')
+    list_filter = ('status', 'reached_out', 'program_interest', 'source', 'created_at')
+    search_fields = ('first_name', 'last_name', 'email', 'phone_number')
+    list_editable = ('status', 'reached_out')
+    date_hierarchy = 'created_at'
+    readonly_fields = ('created_at', 'updated_at')
+    fieldsets = (
+        ('Contact Info', {'fields': ('first_name', 'last_name', 'email', 'phone_number')}),
+        ('Interest', {'fields': ('program_interest', 'source')}),
+        ('Status', {'fields': ('status', 'reached_out', 'last_contacted_at', 'next_followup_at')}),
+        ('Relationships', {'fields': ('chat_group', 'application', 'student')}),
+        ('Notes', {'fields': ('notes',)}),
+        ('Timestamps', {'fields': ('created_at', 'updated_at')}),
+    )
+
 # Register existing models
+admin.site.register(Lead, LeadAdmin)
 admin.site.register(PageVisit, PageVisitAdmin)
 admin.site.register(Course, CourseAdmin)
 # Register your models here.

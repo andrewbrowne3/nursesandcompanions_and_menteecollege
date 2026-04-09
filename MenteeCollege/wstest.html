@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head><title>WebSocket Test</title></head>
+<body style="font-family: Arial; padding: 20px;">
+<h2>WebSocket Chat Test</h2>
+<div id="msgs" style="border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto; margin-bottom: 10px;"></div>
+<input id="inp" placeholder="Type a message..." style="width: 300px; padding: 8px;">
+<button onclick="send()" style="padding: 8px 16px;">Send</button>
+<p id="status" style="color: gray;">Connecting...</p>
+<script>
+const msgs = document.getElementById('msgs');
+const status = document.getElementById('status');
+const ws = new WebSocket('ws://localhost:5010/ws/chat/');
+
+ws.onopen = () => { status.textContent = 'Connected'; status.style.color = 'green'; };
+ws.onclose = (e) => { status.textContent = 'Disconnected (code: ' + e.code + ', reason: ' + e.reason + ')'; status.style.color = 'red'; };
+ws.onerror = (e) => { status.textContent = 'Error'; status.style.color = 'red'; console.error(e); };
+
+ws.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    const div = document.createElement('div');
+    div.style.margin = '5px 0';
+    div.innerHTML = '<b>Bot:</b> ' + data.message;
+    msgs.appendChild(div);
+
+    if (data.options) {
+        data.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.textContent = opt;
+            btn.style.cssText = 'margin: 3px; padding: 6px 12px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 12px;';
+            btn.onclick = () => { ws.send(JSON.stringify({message: opt})); addUser(opt); btn.parentElement.remove(); };
+            div.appendChild(document.createElement('br'));
+            div.appendChild(btn);
+        });
+    }
+    msgs.scrollTop = msgs.scrollHeight;
+};
+
+function addUser(text) {
+    const div = document.createElement('div');
+    div.style.margin = '5px 0';
+    div.innerHTML = '<b style="color:blue">You:</b> ' + text;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+}
+
+function send() {
+    const inp = document.getElementById('inp');
+    if (!inp.value.trim()) return;
+    ws.send(JSON.stringify({message: inp.value}));
+    addUser(inp.value);
+    inp.value = '';
+}
+
+document.getElementById('inp').addEventListener('keydown', (e) => { if (e.key === 'Enter') send(); });
+</script>
+<script src="/js/tracker.js"></script>
+</body>
+</html>

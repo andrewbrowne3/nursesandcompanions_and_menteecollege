@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     command: gunicorn menteecollegewebsite.wsgi:application --bind 0.0.0.0:8010 --workers 3 --timeout 120
     volumes:
-      - sqlite-data:/data/db
+      - ./db:/data/db
       - ./menteeCollegePortal/menteecollegewebsite/staticfiles:/app/staticfiles
       - ./menteeCollegePortal/menteecollegewebsite/media:/app/media
     env_file:
@@ -25,7 +25,7 @@ services:
       dockerfile: Dockerfile
     command: daphne -b 0.0.0.0 -p 8012 menteecollegewebsite.asgi:application
     volumes:
-      - sqlite-data:/data/db
+      - ./db:/data/db
       - ./menteeCollegePortal/menteecollegewebsite/staticfiles:/app/staticfiles
       - ./menteeCollegePortal/menteecollegewebsite/media:/app/media
     env_file:
@@ -42,9 +42,12 @@ services:
     build:
       context: .
       dockerfile: mentee_agent/Dockerfile
+    volumes:
+      - ./db:/data/db
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - MENTEE_AGENT_PORT=5010
+      - DB_PATH=/data/db/db.sqlite3
     restart: unless-stopped
     network_mode: host
 
@@ -57,5 +60,4 @@ services:
     network_mode: host
 
 volumes:
-  sqlite-data:
   redis-data:

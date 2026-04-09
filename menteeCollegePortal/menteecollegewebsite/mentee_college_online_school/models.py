@@ -951,6 +951,68 @@ class PageVisit(models.Model):
         return f"Session: {self.session_id}, Page: {self.page_path}, Time: {self.timestamp}"
 
 
+class Lead(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200, blank=True, default='')
+    email = models.EmailField(blank=True, default='')
+    phone_number = models.CharField(max_length=20, blank=True, default='')
+
+    PROGRAM_CHOICES = [
+        ('cna', 'Nurse Aide (CNA)'),
+        ('lpn', 'Practical Nursing (LPN)'),
+        ('ekg', 'EKG Technician'),
+        ('ma_cert', 'Medical Assistant (Certificate)'),
+        ('ma_assoc', 'Medical Assistant (Associates)'),
+        ('pct', 'Patient Care Technician'),
+        ('phlebotomy', 'Phlebotomy'),
+        ('cpr', 'CPR'),
+        ('other', 'Other'),
+    ]
+    program_interest = models.CharField(max_length=50, choices=PROGRAM_CHOICES, blank=True, default='')
+
+    STATUS_CHOICES = [
+        ('new', 'New'),
+        ('contacted', 'Contacted'),
+        ('qualified', 'Qualified'),
+        ('applied', 'Applied'),
+        ('enrolled', 'Enrolled'),
+        ('lost', 'Lost'),
+    ]
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='new')
+    reached_out = models.BooleanField(default=False)
+
+    SOURCE_CHOICES = [
+        ('chatbot', 'Chatbot'),
+        ('application', 'Application Form'),
+        ('phone', 'Phone Call'),
+        ('walkin', 'Walk-in'),
+        ('referral', 'Referral'),
+        ('google', 'Google'),
+        ('facebook', 'Facebook Ad'),
+        ('instagram', 'Instagram Ad'),
+        ('other', 'Other'),
+    ]
+    source = models.CharField(max_length=20, choices=SOURCE_CHOICES, default='other')
+
+    chat_group = models.ForeignKey('ChatGroup', on_delete=models.SET_NULL, null=True, blank=True, related_name='leads')
+    application = models.ForeignKey('DiplomaApplication', on_delete=models.SET_NULL, null=True, blank=True, related_name='leads')
+    student = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True, blank=True, related_name='leads')
+
+    notes = models.TextField(blank=True, default='')
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    last_contacted_at = models.DateTimeField(null=True, blank=True)
+    next_followup_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.get_status_display()} ({self.program_interest})"
+
+
 # Calendar models for MenteeCollege and NursesAndCompanions
 class Organization(models.Model):
     """Base organization model to categorize calendar events"""

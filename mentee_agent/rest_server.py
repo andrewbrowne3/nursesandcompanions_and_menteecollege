@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from .agent import ConversationSession, start_conversation, handle_message
+from .database import save_message
 
 logger = logging.getLogger("mentee_agent.rest_server")
 
@@ -92,6 +93,9 @@ def create_app(faq_collection, programs, request_api_key=None,
                     page=msg_page,
                 )
 
+                save_message(session.session_id, user_message, author=session.lead.name or "Anonymous")
+                save_message(session.session_id, result["message"], author="Mentee College")
+
                 reply = {
                     "type": "bot_message",
                     "message": result["message"],
@@ -135,6 +139,9 @@ def create_app(faq_collection, programs, request_api_key=None,
             api_key=openai_api_key,
             model=model,
         )
+
+        save_message(session.session_id, req.message, author=session.lead.name or "Anonymous")
+        save_message(session.session_id, response["message"], author="Mentee College")
 
         if debug:
             response["message_history"] = session.message_history
