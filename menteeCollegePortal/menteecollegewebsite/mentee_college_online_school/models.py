@@ -1343,11 +1343,19 @@ class DocumentCategory(models.Model):
     )
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
+    # Compliance / accreditation: mark a category as a required document type.
+    # program_type blank => required for all programs; otherwise scoped to that program.
+    is_required = models.BooleanField(default=False)
+    program_type = models.CharField(max_length=20, blank=True, default="")
+    display_order = models.PositiveIntegerField(default=0)
+    # Which specific programs require this document. A JSON list of program names,
+    # or the special value "ALL" to require it for every program. Empty => not required.
+    required_for_programs = models.JSONField(default=list, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural = "Document Categories"
-        ordering = ["name"]
+        ordering = ["display_order", "name"]
 
     def __str__(self):
         return self.name

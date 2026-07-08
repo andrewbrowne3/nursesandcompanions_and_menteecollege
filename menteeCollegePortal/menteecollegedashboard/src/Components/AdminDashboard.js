@@ -24,12 +24,14 @@ import {
   Analytics as AnalyticsIcon,
   Settings as SettingsIcon,
   Person as PersonIcon,
+  AssignmentTurnedIn as RequiredIcon,
   ArrowBack,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import DocumentManagement from './DocumentManagement';
 import CohortManagement from './CohortManagement';
 import AllStudents from './AllStudents';
+import RequiredDocuments from './RequiredDocuments';
 
 const drawerWidth = 240;
 
@@ -46,6 +48,7 @@ const AdminDashboard = () => {
     { id: 'overview', label: 'Overview', icon: <DashboardIcon /> },
     { id: 'students', label: 'Students', icon: <PersonIcon /> },
     { id: 'documents', label: 'Documents', icon: <DocumentIcon /> },
+    { id: 'required', label: 'Required Docs', icon: <RequiredIcon /> },
     { id: 'cohorts', label: 'Cohorts', icon: <GroupIcon /> },
     { id: 'categories', label: 'Categories', icon: <CategoryIcon /> },
     { id: 'analytics', label: 'Analytics', icon: <AnalyticsIcon /> },
@@ -82,6 +85,8 @@ const AdminDashboard = () => {
         return <AllStudents />;
       case 'documents':
         return <DocumentManagement />;
+      case 'required':
+        return <RequiredDocuments embedded />;
       case 'cohorts':
         return <CohortManagement />;
       case 'overview':
@@ -120,12 +125,13 @@ const AdminDashboard = () => {
             Mentee College Admin Dashboard
           </Typography>
           <Button
+            color="inherit"
             variant="outlined"
             startIcon={<ArrowBack />}
             onClick={() => navigate('/Dashboard')}
-            sx={{ ml: 2, display: { xs: 'none', sm: 'flex' } }}
+            sx={{ ml: 2, borderColor: 'rgba(255,255,255,0.7)' }}
           >
-            Back to Student Dashboard
+            Main Dashboard
           </Button>
         </Toolbar>
       </AppBar>

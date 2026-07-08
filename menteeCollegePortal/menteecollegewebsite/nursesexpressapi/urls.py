@@ -8,6 +8,7 @@ from . import (
     views_cohort_management,  # Import cohort management views
     views_student_portal,  # Import student portal views
     views_admin_management,  # Import admin management views
+    views_student_profile,  # Unified student profile (accreditation)
     viewscookies,
 )
 
@@ -134,6 +135,12 @@ urlpatterns = [
     path("api/admin/students/<str:username>/update-grade/", views_admin_management.update_student_grade, name="admin-update-grade"),
     path("api/admin/students/<str:username>/record-payment/", views_admin_management.record_payment, name="admin-record-payment"),
     path("api/admin/students/<str:username>/update-contact/", views_admin_management.update_student_contact, name="admin-update-contact"),
+    # Unified student profile + cohort compliance roll-up (accreditation monitoring)
+    path("api/admin/students/<str:username>/profile/", views_student_profile.student_profile, name="admin-student-profile"),
+    path("api/admin/cohorts/<str:cohort_id>/compliance/", views_student_profile.cohort_compliance, name="admin-cohort-compliance"),
+    # Per-program required-document configuration (accreditation)
+    path("api/admin/document-requirements/", views_student_profile.document_requirements, name="admin-document-requirements"),
+    path("api/admin/document-requirements/<str:category_id>/", views_student_profile.set_document_requirement, name="admin-set-document-requirement"),
     path("api/admin/students/<str:username>/create-payment-schedule/", views_admin_management.create_payment_schedule, name="admin-create-payment-schedule"),
     path("api/admin/students/<str:username>/payment-schedules/", views_admin_management.list_payment_schedules, name="admin-list-payment-schedules"),
     path("api/admin/students/<str:username>/payment-schedules/<str:schedule_id>/", views_admin_management.delete_payment_schedule, name="admin-delete-payment-schedule"),

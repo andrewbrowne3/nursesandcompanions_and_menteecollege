@@ -59,8 +59,8 @@
 /* Registration Card */
 .registration-card {
   width: 100%;
-  max-width: 800px;
-  margin-bottom: 20px;
+  max-width: 100%;
+  margin-bottom: 0;
   height: auto;
 }
 

@@ -70,9 +70,9 @@ const AdminRoute = ({ children }) => {
     );
   }
 
-  // Redirect to dashboard if not admin
+  // Redirect students to their dashboard if not admin (route is capitalized).
   if (!isAdmin) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/Dashboard" replace />;
   }
 
   // Render admin content if user is admin

@@ -145,6 +145,16 @@ const Header = () => {
                 </Button>
                 <Button
                   component={Link}
+                  to="/required-documents"
+                  variant="outlined"
+                  color="warning"
+                  startIcon={<Book />}
+                  className="admin-nav-button"
+                >
+                  Required Docs
+                </Button>
+                <Button
+                  component={Link}
                   to="/admin"
                   variant="contained"
                   color="secondary"

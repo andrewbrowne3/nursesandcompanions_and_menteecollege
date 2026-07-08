@@ -4,9 +4,14 @@ __pycache__/
 .env
 db.sqlite3
 *.sqlite3
+*.sqlite3.bak*
+db/
 staticfiles/
 media/
 *.log
+
+# Local backups
+scratch_backup_*/
 .DS_Store
 _DS_Store
 

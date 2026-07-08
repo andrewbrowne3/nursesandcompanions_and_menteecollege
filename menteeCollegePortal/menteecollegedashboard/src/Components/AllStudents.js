@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Paper,
@@ -19,7 +20,11 @@ import {
   Chip,
   Card,
   CardContent,
-  Grid
+  Grid,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem
 } from '@mui/material';
 import {
   Visibility,
@@ -38,12 +43,15 @@ import { Button } from '@mui/material';
 const AllStudents = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  const navigate = useNavigate();
 
   const [students, setStudents] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [programFilter, setProgramFilter] = useState('all');
+  const [cohortFilter, setCohortFilter] = useState('all');
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [showAddStudentModal, setShowAddStudentModal] = useState(false);
@@ -57,21 +65,52 @@ const AllStudents = () => {
   }, [userInfo]);
 
   useEffect(() => {
-    // Filter students based on search term
-    if (searchTerm.trim() === '') {
-      setFilteredStudents(students);
-    } else {
-      const term = searchTerm.toLowerCase();
-      const filtered = students.filter(student =>
-        student.first_name?.toLowerCase().includes(term) ||
-        student.last_name?.toLowerCase().includes(term) ||
-        student.username?.toLowerCase().includes(term) ||
-        student.email?.toLowerCase().includes(term) ||
-        student.cohort?.academic_year?.toLowerCase().includes(term)
-      );
-      setFilteredStudents(filtered);
-    }
-  }, [searchTerm, students]);
+    // Filter students by program, then cohort, then free-text search.
+    const term = searchTerm.trim().toLowerCase();
+    const filtered = students.filter((student) => {
+      const programName = student.cohort?.program_name || '';
+      const cohortKey = student.cohort
+        ? `${student.cohort.cohort_number}|${student.cohort.academic_year}`
+        : '';
+
+      if (programFilter !== 'all' && programName !== programFilter) return false;
+      if (cohortFilter !== 'all' && cohortKey !== cohortFilter) return false;
+
+      if (term) {
+        return (
+          student.first_name?.toLowerCase().includes(term) ||
+          student.last_name?.toLowerCase().includes(term) ||
+          student.username?.toLowerCase().includes(term) ||
+          student.email?.toLowerCase().includes(term) ||
+          student.cohort?.academic_year?.toLowerCase().includes(term)
+        );
+      }
+      return true;
+    });
+    setFilteredStudents(filtered);
+  }, [searchTerm, programFilter, cohortFilter, students]);
+
+  // Reset cohort filter when it no longer belongs to the chosen program.
+  useEffect(() => {
+    setCohortFilter('all');
+  }, [programFilter]);
+
+  // Unique program names present in the data.
+  const programOptions = [
+    ...new Set(students.map((s) => s.cohort?.program_name).filter(Boolean)),
+  ].sort();
+
+  // Cohorts present, narrowed to the selected program if one is chosen.
+  const cohortOptions = [
+    ...new Map(
+      students
+        .filter((s) => s.cohort && (programFilter === 'all' || s.cohort.program_name === programFilter))
+        .map((s) => [
+          `${s.cohort.cohort_number}|${s.cohort.academic_year}`,
+          { number: s.cohort.cohort_number, year: s.cohort.academic_year },
+        ])
+    ).entries(),
+  ].sort((a, b) => b[1].number - a[1].number);
 
   const fetchAllStudents = async () => {
     setLoading(true);
@@ -132,21 +171,9 @@ const AllStudents = () => {
     }
   };
 
-  const handleViewStudent = async (student) => {
-    // Fetch full student details before opening modal
-    try {
-      const authToken = userInfo?.token || userInfo?.access;
-      const response = await axios.get(
-        `${API_BASE}/api/students/${student.username}/`,
-        { headers: { Authorization: `Bearer ${authToken}` } }
-      );
-
-      setSelectedStudent(response.data);
-      setShowDetailModal(true);
-    } catch (err) {
-      console.error('Error fetching student details:', err);
-      setError('Failed to load student details');
-    }
+  const handleViewStudent = (student) => {
+    // Open the unified student profile page (courses, grades, compliance).
+    navigate(`/students/${student.username}`);
   };
 
   const getProgramCount = (student) => {
@@ -229,22 +256,63 @@ const AllStudents = () => {
           </Grid>
         </Grid>
 
-        {/* Search Bar */}
-        <Box sx={{ mb: 3 }}>
-          <TextField
-            fullWidth
-            placeholder="Search by name, username, email, or cohort..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Search />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Box>
+        {/* Filters: Program -> Cohort -> Search */}
+        <Grid container spacing={2} sx={{ mb: 3 }} alignItems="center">
+          <Grid item xs={12} sm={3}>
+            <FormControl fullWidth size="small">
+              <InputLabel>Program</InputLabel>
+              <Select
+                label="Program"
+                value={programFilter}
+                onChange={(e) => setProgramFilter(e.target.value)}
+              >
+                <MenuItem value="all">All programs</MenuItem>
+                {programOptions.map((p) => (
+                  <MenuItem key={p} value={p}>{p}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            <FormControl fullWidth size="small">
+              <InputLabel>Cohort</InputLabel>
+              <Select
+                label="Cohort"
+                value={cohortFilter}
+                onChange={(e) => setCohortFilter(e.target.value)}
+              >
+                <MenuItem value="all">All cohorts</MenuItem>
+                {cohortOptions.map(([key, c]) => (
+                  <MenuItem key={key} value={key}>
+                    Cohort {c.number} · {c.year}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              size="small"
+              placeholder="Search by name, username, email, or cohort..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Search />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="body2" color="text.secondary">
+              Showing {filteredStudents.length} of {students.length} students
+              {programFilter !== 'all' && ` · ${programFilter}`}
+            </Typography>
+          </Grid>
+        </Grid>
 
         {/* Students Table */}
         {loading ? (

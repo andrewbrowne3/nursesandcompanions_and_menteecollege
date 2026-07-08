@@ -12,6 +12,8 @@ import AdminDashboard from './Components/AdminDashboard';
 import CartPage from './Components/Cart/CartPage';
 import CheckoutPage from './screens/CheckoutPage';
 import CohortManagement from './Components/CohortManagement';
+import StudentProfile from './Components/StudentProfile';
+import RequiredDocuments from './Components/RequiredDocuments';
 import { CartProvider } from './contexts/CartContext';
 import ProtectedRoute from './Components/ProtectedRoute';
 import useTokenValidation from './hooks/useTokenValidation';
@@ -68,6 +70,16 @@ function App() {
             <Route path="/admin" element={
               <AdminRoute>
                 <AdminDashboard />
+              </AdminRoute>
+            } />
+            <Route path="/students/:username" element={
+              <AdminRoute>
+                <StudentProfile />
+              </AdminRoute>
+            } />
+            <Route path="/required-documents" element={
+              <AdminRoute>
+                <RequiredDocuments />
               </AdminRoute>
             } />
           </Routes>

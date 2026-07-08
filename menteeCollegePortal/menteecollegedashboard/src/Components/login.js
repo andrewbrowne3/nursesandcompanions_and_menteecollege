@@ -22,17 +22,13 @@ const LoginPage = ({history }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('Logging in with username:', username, 'and password:', password);
-    dispatch(login(username, password)); 
+    dispatch(login(username, password));
   };
 
   useEffect(() => {
-    console.log('In useEffect, userInfo is:', userInfo);
     if (userInfo) {
-      console.log('User is logged in, redirecting to:', redirect);
-      alert("Login successful!");
-      navigate("/Dashboard"); 
-      
+      // Route by role: staff go to the admin console, students to their dashboard.
+      navigate(userInfo.isAdmin ? "/admin" : "/Dashboard");
     }
   }, [userInfo, navigate, redirect]);
   

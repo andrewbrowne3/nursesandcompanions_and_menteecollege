@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
   Typography,
@@ -46,6 +47,7 @@ import axios from 'axios';
 import StudentDetailModal from './StudentDetailModal';
 
 const CohortDetail = ({ cohort, onBack }) => {
+  const navigate = useNavigate();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -201,8 +203,8 @@ const CohortDetail = ({ cohort, onBack }) => {
   };
 
   const handleViewStudent = (student) => {
-    setSelectedStudent(student);
-    setShowStudentModal(true);
+    // Open the unified student profile page (courses, grades, compliance).
+    navigate(`/students/${student.username}`);
   };
 
   const handleExportStudents = () => {
